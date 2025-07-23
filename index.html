@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouzeri Soheib - Mobile Developer</title>
+
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons for modern icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+
+    <style>
+        /* Custom styles to match the design */
+        body {
+            background-color: #0d001f;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
+        }
+
+        /* Custom gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #c874ff, #9b51e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Glassmorphism effect for cards */
+        .glass-card {
+            background: rgba(25, 9, 51, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(155, 81, 224, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(155, 81, 224, 0.3);
+            border-color: rgba(155, 81, 224, 0.4);
+        }
+        
+        /* Main logo and orbit animation */
+        .orbit-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .orbit {
+            position: absolute;
+            border-style: solid;
+            border-color: rgba(155, 81, 224, 0.3);
+            border-radius: 50%;
+            animation: rotate 15s linear infinite;
+        }
+
+        .orbit:nth-child(1) { width: 150px; height: 150px; border-width: 1px; animation-duration: 12s; }
+        .orbit:nth-child(2) { width: 220px; height: 220px; border-width: 1px; animation-duration: 18s; animation-direction: reverse; }
+        .orbit:nth-child(3) { width: 300px; height: 300px; border-width: 2px; animation-duration: 25s; }
+        
+        .central-logo {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #c874ff;
+            text-shadow: 0 0 15px #c874ff, 0 0 30px #c874ff;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+
+        /* Scroll-triggered fade-in animation */
+        .fade-in-section { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-section.is-visible { opacity: 1; transform: translateY(0); }
+        
+        /* Project gallery styles */
+        .project-gallery {
+            position: relative;
+            overflow: hidden;
+        }
+        .project-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .project-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .project-screenshot {
+            max-width: 100%;
+            max-height: 450px;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: auto;
+            display: block;
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+        }
+        .gallery-button {
+            background-color: rgba(13, 0, 31, 0.5);
+            color: white;
+            border: 1px solid rgba(155, 81, 224, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .gallery-button:hover {
+            background-color: rgba(155, 81, 224, 0.5);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-opacity-30 backdrop-filter backdrop-blur-lg border-b border-purple-900/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">OS</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#skills" class="text-gray-300 hover:text-white transition">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+            </nav>
+            <a href="mailto:soheib04ouz@gmail.com" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-5 py-2 rounded-lg transition shadow-lg shadow-purple-600/20">Hire Me</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-32">
+
+        <!-- Hero Section -->
+        <section id="home" class="text-center py-20 fade-in-section">
+            <div class="flex justify-center mb-6">
+                <img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/600x600_045803.jpg?alt=media&token=283859bc-b277-4248-934b-f3f79f4061f0" 
+                     alt="Ouzeri Soheib" 
+                     class="w-28 h-28 rounded-full border-2 border-purple-500 shadow-lg shadow-purple-500/30"
+                     onerror="this.onerror=null;this.src='https://placehold.co/112x112/0d001f/c874ff?text=OS';">
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold my-4 leading-tight">Ouzeri Soheib</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold my-4"><span class="gradient-text">Mobile Developer</span></h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto">
+                A passionate mobile developer with 3 years of experience building modern, user-friendly Android applications. Now focusing on cross-platform development with Kotlin Multiplatform to create seamless, high-performance experiences for both Android and iOS.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 flex flex-col items-center justify-center fade-in-section">
+             <h2 class="text-3xl font-bold text-center mb-4">Core Technologies</h2>
+             <p class="text-gray-400 text-center mb-8 max-w-2xl">I leverage modern architecture patterns like MVVM and Clean Architecture, with a strong focus on dependency injection using Dagger-Hilt and Koin.</p>
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto">
+                <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" class="h-10">
+                <img src="https://img.shields.io/badge/Kotlin%20Multiplatform-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin Multiplatform" class="h-10">
+                <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" class="h-10">
+                <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android" class="h-10">
+                <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" class="h-10">
+                <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" class="h-10">
+                <img src="https://img.shields.io/badge/Ktor-0095D5?style=for-the-badge&logo=ktor&logoColor=white" alt="Ktor" class="h-10">
+                <img src="https://img.shields.io/badge/Dagger-Hilt-ef6c00?style=for-the-badge&logo=dagger&logoColor=white" alt="Dagger-Hilt" class="h-10">
+                <img src="https://img.shields.io/badge/Room-D45A16?style=for-the-badge&logo=sqlite&logoColor=white" alt="Room DB" class="h-10">
+            </div>
+             <div class="orbit-container">
+                <div class="orbit"></div>
+                <div class="orbit"></div>
+                <div class="orbit"></div>
+                <div class="central-logo">OS</div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 fade-in-section">
+            <h2 class="text-3xl font-bold text-center mb-16">Featured Projects</h2>
+            
+            <!-- Project 1: AutoSmart -->
+            <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+                <div class="md:pr-8">
+                    <h3 class="text-2xl font-bold mb-4">AutoSmart</h3>
+                    <p class="text-gray-400 mb-6">
+                        A comprehensive mobile marketplace for cars. Features include advanced filtering, map-based search via MapBox, real-time chat, and listing management. A key feature is an ML model for predicting car prices.
+                    </p>
+                     <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400">Tech Stack:</strong> Jetpack Compose, Firebase, MapBox, Ktor, Dagger-Hilt, MVVM, Clean Architecture.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/ouzerisoheib" target="_blank" class="text-purple-400 hover:text-purple-300 transition"><i data-lucide="github" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-600 cursor-not-allowed" aria-disabled="true"><i data-lucide="smartphone" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl p-2 md:p-4">
+                     <div class="project-gallery" data-gallery-id="autosmart">
+                        <div class="project-slides">
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_161316_AutoSmart.png?alt=media&token=6c731535-fe5f-4eef-8ab7-32e6ffb93221" alt="AutoSmart Home" class="project-screenshot"></div>
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_164926_AutoSmart.png?alt=media&token=2752a326-54ff-4f85-b2e4-772e6ddfff85" alt="AutoSmart Details" class="project-screenshot"></div>
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_161650_AutoSmart.png?alt=media&token=b20946ce-c0f8-4b51-8254-ae7a99919fa4" alt="AutoSmart Prediction" class="project-screenshot"></div>
+                        </div>
+                        <div class="gallery-nav">
+                            <button class="gallery-button prev"><i data-lucide="chevron-left"></i></button>
+                            <button class="gallery-button next"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: 7irafi -->
+            <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+                <div class="glass-card rounded-2xl p-2 md:p-4 md:order-last">
+                    <div class="project-gallery" data-gallery-id="hirafi">
+                        <div class="project-slides">
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162844_Hirafi.png?alt=media&token=3530aa9b-033b-4e4a-a73e-bfeb0e4fa343" alt="7irafi Home" class="project-screenshot"></div>
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162857_Hirafi.png?alt=media&token=0a7ddcab-913c-4743-9ae6-3abb0482861a" alt="7irafi Profile" class="project-screenshot"></div>
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162919_Hirafi.png?alt=media&token=f9845c6c-2671-4dea-b0e9-a878e6d448ed" alt="7irafi Search" class="project-screenshot"></div>
+                             <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162830_Hirafi.png?alt=media&token=601bf1c4-59d9-4ac5-bb73-10284dd541e2" alt="7irafi Login" class="project-screenshot"></div>
+                        </div>
+                        <div class="gallery-nav">
+                            <button class="gallery-button prev"><i data-lucide="chevron-left"></i></button>
+                            <button class="gallery-button next"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:pl-8">
+                    <h3 class="text-2xl font-bold mb-4">7irafi</h3>
+                    <p class="text-gray-400 mb-6">
+                        A handyman marketplace platform connecting users with skilled professionals. Users can search for services, view handyman profiles, and initiate contact seamlessly.
+                    </p>
+                    <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400">Tech Stack:</strong> Jetpack Compose, Firebase, MapBox, Ktor, FCM, Dagger-Hilt, MVVM.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/ouzerisoheib" target="_blank" class="text-purple-400 hover:text-purple-300 transition"><i data-lucide="github" class="w-6 h-6"></i></a>
+                         <a href="#" class="text-gray-600 cursor-not-allowed" aria-disabled="true"><i data-lucide="smartphone" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3: Easy Money Follow Up -->
+            <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+                <div class="md:pr-8">
+                    <h3 class="text-2xl font-bold mb-4">Easy Money Follow Up</h3>
+                    <p class="text-gray-400 mb-6">
+                        A secure chat application for course subscribers to communicate with admins and in groups. Built with Kotlin Multiplatform for both Android & iOS, it features enhanced security to prevent screenshots and screen recording.
+                    </p>
+                     <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400">Tech Stack:</strong> Kotlin Multiplatform, Supabase, Bunny.net, Ktor, Koin, Clean Architecture.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/ouzerisoheib" target="_blank" class="text-purple-400 hover:text-purple-300 transition"><i data-lucide="github" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-600 cursor-not-allowed" aria-disabled="true"><i data-lucide="smartphone" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+                <div class="glass-card rounded-2xl p-2 md:p-4">
+                     <div class="project-gallery" data-gallery-id="easymoney">
+                        <div class="project-slides">
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_163530_Easy%20Money%20Follow%20Up.png?alt=media&token=99ad3705-f7f5-41ba-84cf-d3e380cea4ad" alt="Easy Money Chat" class="project-screenshot"></div>
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_165622_Easy%20Money%20Follow%20Up.png?alt=media&token=074b2aad-3a5d-41f8-8ed2-5167155546a9" alt="Easy Money Admin Chat" class="project-screenshot"></div>
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_163612_Easy%20Money%20Follow%20Up.png?alt=media&token=996cfda4-a16a-46e6-923b-47966ab9cd39" alt="Easy Money Login" class="project-screenshot"></div>
+                        </div>
+                        <div class="gallery-nav">
+                            <button class="gallery-button prev"><i data-lucide="chevron-left"></i></button>
+                            <button class="gallery-button next"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4: Mark Computer POS -->
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div class="glass-card rounded-2xl p-2 md:p-4 md:order-last">
+                     <div class="project-gallery" data-gallery-id="markcomputer">
+                        <div class="project-slides">
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170342.png?alt=media&token=954dc9e9-8c3e-4511-8b96-3ca2f1a23bd4" alt="Mark Computer Sales" class="project-screenshot"></div>
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170314.png?alt=media&token=14e2091c-6d7e-4af2-aaee-977c83aee919" alt="Mark Computer POS" class="project-screenshot"></div>
+                            <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170403.png?alt=media&token=962d4bf1-945b-414d-9ec0-855c3575ae4a" alt="Mark Computer Table" class="project-screenshot"></div>
+                        </div>
+                        <div class="gallery-nav">
+                            <button class="gallery-button prev"><i data-lucide="chevron-left"></i></button>
+                            <button class="gallery-button next"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:pl-8">
+                    <h3 class="text-2xl font-bold mb-4">Mark Computer POS</h3>
+                    <p class="text-gray-400 mb-6">
+                        A desktop Point-of-Sale (POS) and inventory management system for a computer store. It provides full sales functionalities, benefit calculation, and analytics.
+                    </p>
+                    <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400">Tech Stack:</strong> Compose for Desktop, Room, MVVM.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/ouzerisoheib" target="_blank" class="text-purple-400 hover:text-purple-300 transition"><i data-lucide="github" class="w-6 h-6"></i></a>
+                         <a href="#" class="text-gray-600 cursor-not-allowed" aria-disabled="true"><i data-lucide="monitor" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 text-center fade-in-section">
+            <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
+            <p class="text-gray-400 max-w-xl mx-auto mb-8">
+                I'm currently open to new opportunities and collaborations. If you have a project in mind or just want to connect, feel free to reach out.
+            </p>
+            <div class="flex justify-center space-x-6">
+                 <a href="https://github.com/ouzerisoheib" target="_blank" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="github" class="w-8 h-8"></i></a>
+                 <a href="https://www.linkedin.com/in/ouzeriSoheib" target="_blank" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="linkedin" class="w-8 h-8"></i></a>
+                 <a href="mailto:soheib04ouz@gmail.com" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="mail" class="w-8 h-8"></i></a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 border-t border-purple-900/20">
+        <p class="text-gray-500">&copy; 2024 Ouzeri Soheib. Designed & Built from scratch.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // JavaScript for scroll-triggered fade-in animations
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll('.fade-in-section');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // JavaScript for Project Galleries
+            const galleries = document.querySelectorAll('.project-gallery');
+            galleries.forEach(gallery => {
+                const slides = gallery.querySelector('.project-slides');
+                const prevButton = gallery.querySelector('.prev');
+                const nextButton = gallery.querySelector('.next');
+                const slideCount = slides.children.length;
+                let currentIndex = 0;
+
+                function updateGallery() {
+                    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+                }
+
+                prevButton.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                    updateGallery();
+                });
+
+                nextButton.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateGallery();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
