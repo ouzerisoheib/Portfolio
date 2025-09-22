@@ -1,317 +1,1115 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dzTech - Xbox Series S</title>
-    <!-- Tailwind CSS -->
+    <meta name="description" content="Ouzeri Soheib - Experienced Mobile Developer specializing in Kotlin Multiplatform, Android, and cross-platform solutions">
+    <meta name="keywords" content="Mobile Developer, Kotlin, Android, iOS, Kotlin Multiplatform, Jetpack Compose, Firebase">
+    <title>Ouzeri Soheib - Mobile Developer | Kotlin Multiplatform Expert</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"></noscript>
+
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons for modern icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Typed.js for dynamic typing effect -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
     <style>
+        /* Custom styles to match the design */
         body {
+            background-color: #0d001f;
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
+            color: #e0e0e0;
+            scroll-behavior: smooth;
         }
 
-        .order-form-container {
+        /* Custom gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #c874ff, #9b51e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Glassmorphism effect for cards */
+        .glass-card {
+            background: rgba(25, 9, 51, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(155, 81, 224, 0.2);
+            transition: all 0.3s ease;
+            border-radius: 1rem;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(155, 81, 224, 0.3);
+            border-color: rgba(155, 81, 224, 0.4);
+        }
+
+        /* Main logo and orbit animation */
+        .orbit-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .orbit {
+            position: absolute;
+            border-style: solid;
+            border-color: rgba(155, 81, 224, 0.3);
+            border-radius: 50%;
+            animation: rotate 15s linear infinite;
+        }
+
+        .orbit:nth-child(1) { width: 150px; height: 150px; border-width: 1px; animation-duration: 12s; }
+        .orbit:nth-child(2) { width: 220px; height: 220px; border-width: 1px; animation-duration: 18s; animation-direction: reverse; }
+        .orbit:nth-child(3) { width: 300px; height: 300px; border-width: 2px; animation-duration: 25s; }
+
+        .central-logo {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #c874ff;
+            text-shadow: 0 0 15px #c874ff, 0 0 30px #c874ff;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+
+        /* Scroll-triggered fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Project gallery styles */
+        .project-gallery {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+        .project-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
+            height: 100%;
+        }
+        .project-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .project-screenshot {
+            max-width: 100%;
+            max-height: 450px;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: auto;
+            display: block;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+        .project-gallery:hover .gallery-nav {
+            opacity: 1;
+        }
+        .gallery-button {
+            background-color: rgba(13, 0, 31, 0.7);
+            color: white;
+            border: 1px solid rgba(155, 81, 224, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
+        }
+        .gallery-button:hover {
+            background-color: rgba(155, 81, 224, 0.7);
+        }
+        .gallery-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .indicator.bg-purple-500 {
+            transform: scale(1.2);
+            background-color: rgba(200, 116, 255, 1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(25, 9, 51, 0.3);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(155, 81, 224, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(155, 81, 224, 0.7);
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            background-color: rgba(13, 0, 31, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Experience timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #9b51e0, #c874ff);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #9b51e0;
+            box-shadow: 0 0 0 4px rgba(155, 81, 224, 0.2);
+        }
+
+        /* Skill meter animation */
+        .skill-meter {
+            height: 4px;
+            background: rgba(155, 81, 224, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #c874ff, #9b51e0);
+            border-radius: 2px;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Contact form styles */
+        .form-input {
+            background: rgba(25, 9, 51, 0.4);
+            border: 1px solid rgba(155, 81, 224, 0.2);
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(155, 81, 224, 0.5);
+            box-shadow: 0 0 0 3px rgba(155, 81, 224, 0.1);
+        }
+
+        /* Loading animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin 3s linear infinite;
+        }
+
+        /* Language switcher */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .language-dropdown {
             display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(25, 9, 51, 0.9);
+            border: 1px solid rgba(155, 81, 224, 0.3);
+            border-radius: 0.5rem;
+            min-width: 120px;
+            z-index: 100;
         }
-        
-        /* Custom styling for the form and options */
-        .option-label {
-            @apply flex items-center justify-center h-12 px-4 border rounded-lg cursor-pointer transition-colors duration-200 ease-in-out;
+        .language-switcher:hover .language-dropdown {
+            display: block;
         }
-
-        .option-input:checked + .option-label {
-            @apply border-blue-500 bg-blue-50 text-blue-800 ring-2 ring-blue-500;
+        .language-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-
-        .wilaya-select option {
-            background-color: #fff;
-            color: #1f2937;
-        }
-        
-        /* Smooth scrolling to sections */
-        .scroll-target {
-            scroll-margin-top: 80px; /* Adjust based on header height */
+        .language-option:hover {
+            background: rgba(155, 81, 224, 0.3);
         }
     </style>
 </head>
+<body class="overflow-x-hidden">
 
-<body class="bg-gray-100 antialiased">
+<!-- Header & Navigation -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-opacity-30 backdrop-filter backdrop-blur-lg border-b border-purple-900/20">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold gradient-text hover:opacity-80 transition-opacity">OS</a>
 
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold text-gray-800">dz<span class="text-blue-600">Tech</span></a>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#product-details" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Product</a>
-                <a href="#order-form" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Order</a>
-            </nav>
-            <div class="md:hidden">
-                <!-- Mobile menu button can go here -->
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8">
+            <a href="#home" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.home">Home</a>
+            <a href="#skills" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.skills">Skills</a>
+            <a href="#projects" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.projects">Projects</a>
+            <a href="#journey" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.journey">My Journey</a>
+            <a href="#resume" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.resume">Resume</a>
+            <a href="#contact" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.contact">Contact</a>
+
+            <!-- Language Switcher -->
+            <div class="language-switcher ml-4">
+                <button class="flex items-center text-gray-300 hover:text-white">
+                    <i data-lucide="languages" class="w-5 h-5 mr-1"></i>
+                    <span id="current-language">EN</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                </button>
+                <div class="language-dropdown mt-2 py-2">
+                    <div class="language-option" data-lang="en">English</div>
+                    <div class="language-option" data-lang="fr">Français</div>
+                    <div class="language-option" data-lang="ar">العربية</div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+
+        <a href="mailto:soheib04ouz@gmail.com" class="hidden md:block bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-semibold px-5 py-2 rounded-lg transition-all shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40" data-i18n="nav.hire">Hire Me</a>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-64 z-50 p-6 border-l border-purple-900/20">
+        <div class="flex justify-between items-center mb-8">
+            <a href="#" class="text-2xl font-bold gradient-text">OS</a>
+            <button id="mobile-menu-close" class="text-gray-300 hover:text-white focus:outline-none">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-6">
+            <a href="#home" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.home">Home</a>
+            <a href="#skills" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.skills">Skills</a>
+            <a href="#projects" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.projects">Projects</a>
+            <a href="#journey" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.journey">My Journey</a>
+            <a href="#resume" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.resume">Resume</a>
+            <a href="#contact" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.contact">Contact</a>
+
+            <!-- Mobile Language Switcher -->
+            <div class="pt-4 border-t border-purple-900/20" >
+                <h4 class="text-sm text-gray-500 mb-2" data-i18n="nav.language">Language</h4>
+                <div class="flex space-x-3">
+                    <button class="language-btn px-3 py-1 rounded-md bg-purple-900/30 text-white" data-lang="en">EN</button>
+                    <button class="language-btn px-3 py-1 rounded-md bg-transparent text-gray-400 hover:text-white" data-lang="fr">FR</button>
+                    <button class="language-btn px-3 py-1 rounded-md bg-transparent text-gray-400 hover:text-white" data-lang="ar">AR</button>
+                </div>
+            </div>
+
+            <a href="mailto:soheib04ouz@gmail.com" class="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-semibold px-5 py-2 rounded-lg transition-all shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 text-center" data-i18n="nav.hire">Hire Me</a>
+        </nav>
+        <div class="absolute bottom-6 left-6 right-6">
+            <div class="flex justify-center space-x-6">
+                <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="https://www.linkedin.com/in/ouzeriSoheib" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                <a href="mailto:soheib04ouz@gmail.com" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
-        
-        <!-- Product Section -->
-        <section id="product-details" class="scroll-target bg-white rounded-xl shadow-lg p-6 md:p-10 lg:flex lg:space-x-10 mb-8">
-            <div class="lg:w-1/2 flex justify-center items-center mb-6 lg:mb-0">
-                <img src="https://placehold.co/600x400/252525/white?text=Xbox+Series+S" alt="Xbox Series S Console" class="w-full h-auto max-w-lg rounded-xl shadow-2xl">
+<main class="container mx-auto px-6 pt-24"> <!-- Added pt-24 to prevent header overlap -->
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center fade-in-section">
+        <div class="flex justify-center mb-6">
+            <img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/1753725021420.jpg?alt=media&token=b000e577-95ae-4e21-957f-1c0392ca999e"
+                 alt="Ouzeri Soheib"
+                 class="w-28 h-28 rounded-full border-2 border-purple-500 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105"
+                 onerror="this.onerror=null;this.src='https://placehold.co/112x112/0d001f/c874ff?text=OS';">
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold my-4 leading-tight">Ouzeri Soheib</h1>
+        <h2 class="text-2xl md:text-3xl font-semibold my-4 h-10"><span id="typed-title" class="gradient-text"></span></h2>
+        <p class="text-lg text-gray-400 max-w-3xl mx-auto" data-i18n="hero.description">
+            A passionate mobile developer with 3+ years of experience building modern, user-friendly applications. Specializing in Kotlin Multiplatform to create seamless, high-performance experiences for both Android and iOS platforms.
+        </p>
+        <div class="mt-8 flex space-x-4">
+            <a href="#projects" class="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-semibold px-6 py-3 rounded-lg transition-all shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 flex items-center">
+                <i data-lucide="eye" class="w-5 h-5 mr-2"></i> <span data-i18n="hero.view-work">View Work</span>
+            </a>
+            <a href="#contact" class="bg-transparent hover:bg-purple-900/30 text-white font-semibold px-6 py-3 rounded-lg transition-all border border-purple-800 hover:border-purple-600 flex items-center">
+                <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i> <span data-i18n="hero.contact">Contact Me</span>
+            </a>
+        </div>
+        <div class="mt-12 animate-float">
+            <a href="#skills" class="text-gray-400 hover:text-purple-400 transition flex flex-col items-center">
+                <span class="text-sm mb-2" data-i18n="hero.explore">Explore More</span>
+                <i data-lucide="chevron-down" class="w-6 h-6"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 flex flex-col items-center justify-center fade-in-section">
+        <h2 class="text-3xl font-bold text-center mb-4" data-i18n="skills.title">Core Technologies</h2>
+        <p class="text-gray-400 text-center mb-8 max-w-2xl" data-i18n="skills.description">
+            I leverage modern architecture patterns like MVVM and Clean Architecture, with a strong focus on dependency injection using Dagger-Hilt and Koin.
+        </p>
+
+        <div class="w-full max-w-4xl mx-auto mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass-card p-6 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <img src="https://cdn.worldvectorlogo.com/logos/kotlin-1.svg" alt="Kotlin" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="font-bold mb-2">Kotlin</h3>
+                    <div class="skill-meter w-full">
+                        <div class="skill-level" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/compose-logo.svg?alt=media&token=bdc2d511-7dc4-4eb0-9393-3fdccb7c5b85" alt="Kotlin Multiplatform" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="font-bold mb-2">KMP</h3>
+                    <div class="skill-meter w-full">
+                        <div class="skill-level" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <img src="https://cdn.worldvectorlogo.com/logos/android-4.svg" alt="Android" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="font-bold mb-2">Android</h3>
+                    <div class="skill-meter w-full">
+                        <div class="skill-level" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/jetpackcomposeicon.png?alt=media&token=d691eb7c-d921-425f-9802-61095505beac" alt="Jetpack Compose" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="font-bold mb-2">Compose</h3>
+                    <div class="skill-meter w-full">
+                        <div class="skill-level" style="width: 88%"></div>
+                    </div>
+                </div>
             </div>
-            <div class="lg:w-1/2">
-                <h1 class="text-4xl font-bold text-gray-900 mb-2">Xbox Series S Console</h1>
-                <p class="text-xl text-gray-600 mb-6">Experience next-gen speed and performance with the Xbox Series S. The smallest, sleekest Xbox ever.</p>
-                
-                <p class="text-4xl font-bold text-blue-600 mb-8">
-                    <span id="product-price">65,000</span> <span class="text-2xl font-normal">DZD</span>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto mb-16">
+            <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Kotlin%20Multiplatform-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin Multiplatform" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Ktor-0095D5?style=for-the-badge&logo=ktor&logoColor=white" alt="Ktor" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Dagger-Hilt-ef6c00?style=for-the-badge&logo=dagger&logoColor=white" alt="Dagger-Hilt" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Room-D45A16?style=for-the-badge&logo=sqlite&logoColor=white" alt="Room DB" class="h-10" loading="lazy">
+        </div>
+
+        <div class="orbit-container">
+            <div class="orbit"></div>
+            <div class="orbit"></div>
+            <div class="orbit"></div>
+            <div class="central-logo">OS</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 fade-in-section">
+        <h2 class="text-3xl font-bold text-center mb-16" data-i18n="projects.title">Featured Projects</h2>
+
+        <!-- Project 1: AutoSmart -->
+        <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+            <div class="md:pr-8">
+                <h3 class="text-2xl font-bold mb-4">AutoSmart</h3>
+                <p class="text-gray-400 mb-6" data-i18n="projects.autosmart.description">
+                    A comprehensive mobile marketplace for cars. Features include advanced filtering, map-based search via MapBox, real-time chat, and listing management. A key feature is an ML model for predicting car prices.
                 </p>
-
-                <!-- Console Options Form -->
-                <form id="product-options-form" class="space-y-6">
-                    <!-- Color Options -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Color</h3>
-                        <div class="flex flex-wrap gap-4">
-                            <label class="flex-grow">
-                                <input type="radio" name="color" value="White" class="option-input hidden" checked>
-                                <span class="option-label">White</span>
-                            </label>
-                            <label class="flex-grow">
-                                <input type="radio" name="color" value="Black" class="option-input hidden">
-                                <span class="option-label">Black</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Storage Options -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Storage</h3>
-                        <div class="flex flex-wrap gap-4">
-                            <label class="flex-grow">
-                                <input type="radio" name="storage" value="512GB" class="option-input hidden" checked>
-                                <span class="option-label">512 GB SSD</span>
-                            </label>
-                            <label class="flex-grow">
-                                <input type="radio" name="storage" value="1TB" class="option-input hidden">
-                                <span class="option-label">1 TB SSD</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Controller Options -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Controller</h3>
-                        <div class="flex flex-wrap gap-4">
-                            <label class="flex-grow">
-                                <input type="radio" name="controller" value="Standard" class="option-input hidden" checked>
-                                <span class="option-label">Standard (1 controller)</span>
-                            </label>
-                            <label class="flex-grow">
-                                <input type="radio" name="controller" value="Extra" class="option-input hidden">
-                                <span class="option-label">+ Extra Controller</span>
-                            </label>
-                        </div>
-                    </div>
-                </form>
-
-                <button id="order-now-btn" class="w-full mt-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50">
-                    Order Now
-                </button>
+                <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400" data-i18n="projects.tech-stack">Tech Stack:</strong> Jetpack Compose, Firebase, MapBox, Ktor, Dagger-Hilt, MVVM, Clean Architecture.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="flex items-center text-purple-400 hover:text-purple-300 transition bg-purple-900/30 hover:bg-purple-900/50 px-4 py-2 rounded-lg">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.view-code">View Code</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-400 bg-gray-800/30 px-4 py-2 rounded-lg cursor-not-allowed" aria-disabled="true">
+                        <i data-lucide="smartphone" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.app-unavailable">App Unavailable</span>
+                    </a>
+                </div>
             </div>
-        </section>
-
-        <!-- Order Form Section -->
-        <section id="order-form" class="scroll-target order-form-container bg-white rounded-xl shadow-lg p-6 md:p-10 mb-8">
-            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Client Information</h2>
-            <form id="client-info-form" class="space-y-6">
-                <!-- Name and Phone -->
-                <div>
-                    <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <input type="text" id="full-name" name="fullName" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+            <div class="glass-card rounded-2xl p-2 md:p-4 hover:shadow-lg hover:shadow-purple-500/20">
+                <div class="project-gallery" data-gallery-id="autosmart">
+                    <div class="project-slides">
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_161316_AutoSmart.png?alt=media&token=6c731535-fe5f-4eef-8ab7-32e6ffb93221" alt="AutoSmart Home" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_164926_AutoSmart.png?alt=media&token=2752a326-54ff-4f85-b2e4-772e6ddfff85" alt="AutoSmart Details" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_161650_AutoSmart.png?alt=media&token=b20946ce-c0f8-4b51-8254-ae7a99919fa4" alt="AutoSmart Prediction" class="project-screenshot" loading="lazy"></div>
+                    </div>
+                    <div class="gallery-nav">
+                        <button class="gallery-button prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                        <button class="gallery-button next" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                    </div>
                 </div>
+            </div>
+        </div>
 
-                <div>
-                    <label for="phone-number" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                    <input type="tel" id="phone-number" name="phoneNumber" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+        <!-- Project 2: 7irafi -->
+        <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+            <div class="glass-card rounded-2xl p-2 md:p-4 md:order-last hover:shadow-lg hover:shadow-purple-500/20">
+                <div class="project-gallery" data-gallery-id="hirafi">
+                    <div class="project-slides">
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162844_Hirafi.png?alt=media&token=3530aa9b-033b-4e4a-a73e-bfeb0e4fa343" alt="7irafi Home" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162857_Hirafi.png?alt=media&token=0a7ddcab-913c-4743-9ae6-3abb0482861a" alt="7irafi Profile" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162919_Hirafi.png?alt=media&token=f9845c6c-2671-4dea-b0e9-a878e6d448ed" alt="7irafi Search" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162830_Hirafi.png?alt=media&token=601bf1c4-59d9-4ac5-bb73-10284dd541e2" alt="7irafi Login" class="project-screenshot" loading="lazy"></div>
+                    </div>
+                    <div class="gallery-nav">
+                        <button class="gallery-button prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                        <button class="gallery-button next" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                    </div>
                 </div>
+            </div>
+            <div class="md:pl-8">
+                <h3 class="text-2xl font-bold mb-4">7irafi</h3>
+                <p class="text-gray-400 mb-6" data-i18n="projects.hirafi.description">
+                    A handyman marketplace platform connecting users with skilled professionals. Users can search for services, view handyman profiles, and initiate contact seamlessly.
+                </p>
+                <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400" data-i18n="projects.tech-stack">Tech Stack:</strong> Jetpack Compose, Firebase, MapBox, Ktor, FCM, Dagger-Hilt, MVVM.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="flex items-center text-purple-400 hover:text-purple-300 transition bg-purple-900/30 hover:bg-purple-900/50 px-4 py-2 rounded-lg">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.view-code">View Code</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-400 bg-gray-800/30 px-4 py-2 rounded-lg cursor-not-allowed" aria-disabled="true">
+                        <i data-lucide="smartphone" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.app-unavailable">App Unavailable</span>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-                <!-- Location -->
-                <div>
-                    <h3 class="text-sm font-medium text-gray-700 mb-2">Location</h3>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <div class="sm:w-1/2">
-                            <label for="wilaya" class="block text-sm font-medium text-gray-700 mb-1">Wilaya (State)</label>
-                            <select id="wilaya" name="wilaya" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 wilaya-select">
-                                <option value="" disabled selected>Select a Wilaya</option>
-                                <option value="Adrar">Adrar</option>
-                                <option value="Chlef">Chlef</option>
-                                <option value="Laghouat">Laghouat</option>
-                                <option value="Oum El Bouaghi">Oum El Bouaghi</option>
-                                <option value="Batna">Batna</option>
-                                <option value="Béjaïa">Béjaïa</option>
-                                <option value="Biskra">Biskra</option>
-                                <option value="Béchar">Béchar</option>
-                                <option value="Blida">Blida</option>
-                                <option value="Bouira">Bouira</option>
-                                <option value="Tamanrasset">Tamanrasset</option>
-                                <option value="Tébessa">Tébessa</option>
-                                <option value="Tlemcen">Tlemcen</option>
-                                <option value="Tiaret">Tiaret</option>
-                                <option value="Tizi Ouzou">Tizi Ouzou</option>
-                                <option value="Algiers">Algiers</option>
-                                <option value="Djelfa">Djelfa</option>
-                                <option value="Jijel">Jijel</option>
-                                <option value="Sétif">Sétif</option>
-                                <option value="Saïda">Saïda</option>
-                                <option value="Skikda">Skikda</option>
-                                <option value="Sidi Bel Abbès">Sidi Bel Abbès</option>
-                                <option value="Annaba">Annaba</option>
-                                <option value="Guelma">Guelma</option>
-                                <option value="Constantine">Constantine</option>
-                                <option value="Médéa">Médéa</option>
-                                <option value="Mostaganem">Mostaganem</option>
-                                <option value="M'Sila">M'Sila</option>
-                                <option value="Mascara">Mascara</option>
-                                <option value="Ouargla">Ouargla</option>
-                                <option value="Oran">Oran</option>
-                                <option value="El Bayadh">El Bayadh</option>
-                                <option value="Illizi">Illizi</option>
-                                <option value="Bordj Bou Arréridj">Bordj Bou Arréridj</option>
-                                <option value="Boumerdès">Boumerdès</option>
-                                <option value="El Taref">El Taref</option>
-                                <option value="Tindouf">Tindouf</option>
-                                <option value="Tissemsilt">Tissemsilt</option>
-                                <option value="El Oued">El Oued</option>
-                                <option value="Khenchela">Khenchela</option>
-                                <option value="Souk Ahras">Souk Ahras</option>
-                                <option value="Tipaza">Tipaza</option>
-                                <option value="Mila">Mila</option>
-                                <option value="Aïn Defla">Aïn Defla</option>
-                                <option value="Naâma">Naâma</option>
-                                <option value="Aïn Témouchent">Aïn Témouchent</option>
-                                <option value="Ghardaïa">Ghardaïa</option>
-                                <option value="Relizane">Relizane</option>
-                            </select>
+        <!-- Project 3: Easy Money Follow Up -->
+        <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+            <div class="md:pr-8">
+                <h3 class="text-2xl font-bold mb-4">Easy Money Follow Up</h3>
+                <p class="text-gray-400 mb-6" data-i18n="projects.easymoney.description">
+                    A secure chat application for course subscribers to communicate with admins and in groups. Built with Kotlin Multiplatform for both Android & iOS, it features enhanced security to prevent screenshots and screen recording.
+                </p>
+                <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400" data-i18n="projects.tech-stack">Tech Stack:</strong> Kotlin Multiplatform, Supabase, Bunny.net, Ktor, Koin, Clean Architecture.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="flex items-center text-purple-400 hover:text-purple-300 transition bg-purple-900/30 hover:bg-purple-900/50 px-4 py-2 rounded-lg">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.view-code">View Code</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-400 bg-gray-800/30 px-4 py-2 rounded-lg cursor-not-allowed" aria-disabled="true">
+                        <i data-lucide="smartphone" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.app-unavailable">App Unavailable</span>
+                    </a>
+                </div>
+            </div>
+            <div class="glass-card rounded-2xl p-2 md:p-4 hover:shadow-lg hover:shadow-purple-500/20">
+                <div class="project-gallery" data-gallery-id="easymoney">
+                    <div class="project-slides">
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_163530_Easy%20Money%20Follow%20Up.png?alt=media&token=99ad3705-f7f5-41ba-84cf-d3e380cea4ad" alt="Easy Money Chat" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_165622_Easy%20Money%20Follow%20Up.png?alt=media&token=074b2aad-3a5d-41f8-8ed2-5167155546a9" alt="Easy Money Admin Chat" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_163612_Easy%20Money%20Follow%20Up.png?alt=media&token=996cfda4-a16a-46e6-923b-47966ab9cd39" alt="Easy Money Login" class="project-screenshot" loading="lazy"></div>
+                    </div>
+                    <div class="gallery-nav">
+                        <button class="gallery-button prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                        <button class="gallery-button next" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 4: Mark Computer POS -->
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="glass-card rounded-2xl p-2 md:p-4 md:order-last hover:shadow-lg hover:shadow-purple-500/20">
+                <div class="project-gallery" data-gallery-id="markcomputer">
+                    <div class="project-slides">
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170342.png?alt=media&token=954dc9e9-8c3e-4511-8b96-3ca2f1a23bd4" alt="Mark Computer Sales" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170314.png?alt=media&token=14e2091c-6d7e-4af2-aaee-977c83aee919" alt="Mark Computer POS" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170403.png?alt=media&token=962d4bf1-945b-414d-9ec0-855c3575ae4a" alt="Mark Computer Table" class="project-screenshot" loading="lazy"></div>
+                    </div>
+                    <div class="gallery-nav">
+                        <button class="gallery-button prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                        <button class="gallery-button next" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="md:pl-8">
+                <h3 class="text-2xl font-bold mb-4">Mark Computer POS</h3>
+                <p class="text-gray-400 mb-6" data-i18n="projects.markcomputer.description">
+                    A desktop Point-of-Sale (POS) and inventory management system for a computer store. It provides full sales functionalities, benefit calculation, and analytics.
+                </p>
+                <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400" data-i18n="projects.tech-stack">Tech Stack:</strong> Compose for Desktop, Room, MVVM.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="flex items-center text-purple-400 hover:text-purple-300 transition bg-purple-900/30 hover:bg-purple-900/50 px-4 py-2 rounded-lg">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.view-code">View Code</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-400 bg-gray-800/30 px-4 py-2 rounded-lg cursor-not-allowed" aria-disabled="true">
+                        <i data-lucide="monitor" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.app-unavailable">App Unavailable</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Journey Section -->
+    <section id="journey" class="py-20 fade-in-section">
+        <h2 class="text-3xl font-bold text-center mb-4" data-i18n="journey.title">My Learning Journey</h2>
+        <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto" data-i18n="journey.description">
+            My path through education and self-learning in mobile development.
+        </p>
+
+        <div class="max-w-3xl mx-auto">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2" data-i18n="journey.2021.title">Baccalaureate & Architecture</h3>
+                    <p class="text-purple-400 mb-2">2021</p>
+                    <p class="text-gray-400" data-i18n="journey.2021.description">
+                        Obtained my first baccalaureate and pursued architecture studies before deciding to change direction.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2" data-i18n="journey.2022.title">Second Baccalaureate & Computer Science</h3>
+                    <p class="text-purple-400 mb-2">2022</p>
+                    <p class="text-gray-400" data-i18n="journey.2022.description">
+                        Retook the baccalaureate and successfully passed again, then enrolled in computer science (engineering systems) at university.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2" data-i18n="journey.self-learning.title">Self-Taught Development</h3>
+                    <p class="text-purple-400 mb-2">2022 - Present</p>
+                    <p class="text-gray-400" data-i18n="journey.self-learning.description">
+                        Began learning mobile development with Kotlin and XML, then transitioned to Jetpack Compose. Now focusing on Kotlin Multiplatform for cross-platform development.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2" data-i18n="journey.computer-security.title">Computer Security Specialization</h3>
+                    <p class="text-purple-400 mb-2">2024</p>
+                    <p class="text-gray-400" data-i18n="journey.computer-security.description">
+                        After completing the first two years of computer science, switched to computer security for my third year while continuing mobile development.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Download Section -->
+    <section id="resume" class="py-20 fade-in-section">
+        <div class="glass-card max-w-3xl mx-auto p-12 text-center">
+            <h2 class="text-3xl font-bold mb-4" data-i18n="resume.title">My Resume</h2>
+            <p class="text-gray-400 mb-8 mx-auto" data-i18n="resume.description">
+                For a detailed look at my skills, experience, and qualifications, you can download my full resume.
+            </p>
+            <!-- IMPORTANT: Replace '#' with the actual path to your resume PDF file -->
+            <a href="#" download="Ouzeri_Soheib_Resume.pdf" class="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-semibold px-8 py-4 rounded-lg transition-all shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 inline-flex items-center text-lg">
+                <i data-lucide="download" class="w-6 h-6 mr-3"></i> <span data-i18n="resume.download">Download CV</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 fade-in-section">
+        <h2 class="text-3xl font-bold text-center mb-4" data-i18n="contact.title">Get In Touch</h2>
+        <p class="text-gray-400 text-center mb-12 max-w-xl mx-auto" data-i18n="contact.description">
+            I'm currently open to new opportunities and collaborations. If you have a project in mind or just want to connect, feel free to reach out.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            <div>
+                <form id="contact-form" class="space-y-6" action="https://formspree.io/f/mvgqaprr" method="POST">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="contact.form.name">Name</label>
+                        <input type="text" id="name" name="name" required class="w-full form-input px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="contact.form.email">Email</label>
+                        <input type="email" id="email" name="email" required class="w-full form-input px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-300 mb-2" data-i18n="contact.form.message">Message</label>
+                        <textarea id="message" name="message" rows="5" required class="w-full form-input px-4 py-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"></textarea>
+                    </div>
+                    <button type="submit" class="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-semibold px-6 py-3 rounded-lg transition-all shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 w-full flex items-center justify-center">
+                        <span id="submit-text" data-i18n="contact.form.submit">Send Message</span>
+                        <span id="submit-spinner" class="hidden ml-2 animate-spin-slow">
+            <i data-lucide="loader" class="w-5 h-5"></i>
+        </span>
+                    </button>
+                </form>
+            </div>
+
+            <div class="space-y-6">
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4" data-i18n="contact.info.title">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i data-lucide="mail" class="w-5 h-5 text-purple-400 mt-1 mr-4"></i>
+                            <div>
+                                <p class="text-sm text-gray-400" data-i18n="contact.info.email">Email</p>
+                                <a href="mailto:soheib04ouz@gmail.com" class="text-white hover:text-purple-300 transition">soheib04ouz@gmail.com</a>
+                            </div>
                         </div>
-                        <div class="sm:w-1/2">
-                            <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
-                            <input type="text" id="city" name="city" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200">
+                        <div class="flex items-start">
+                            <i data-lucide="github" class="w-5 h-5 text-purple-400 mt-1 mr-4"></i>
+                            <div>
+                                <p class="text-sm text-gray-400" data-i18n="contact.info.github">GitHub</p>
+                                <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="text-white hover:text-purple-300 transition">github.com/ouzerisoheib</a>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i data-lucide="linkedin" class="w-5 h-5 text-purple-400 mt-1 mr-4"></i>
+                            <div>
+                                <p class="text-sm text-gray-400" data-i18n="contact.info.linkedin">LinkedIn</p>
+                                <a href="https://www.linkedin.com/in/ouzeriSoheib" target="_blank" rel="noopener noreferrer" class="text-white hover:text-purple-300 transition">linkedin.com/in/ouzeriSoheib</a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Order via WhatsApp option -->
-                <div class="flex items-center space-x-2">
-                    <input type="checkbox" id="whatsapp-order" name="whatsappOrder" class="rounded-lg text-blue-600 focus:ring-blue-500">
-                    <label for="whatsapp-order" class="text-gray-700">Order via WhatsApp</label>
+                <div class="glass-card p-6 rounded-xl">
+                    <h3 class="text-xl font-bold mb-4" data-i18n="contact.availability.title">Availability</h3>
+                    <p class="text-gray-400 mb-4" data-i18n="contact.availability.description">
+                        I'm currently available for freelance work and full-time positions. Feel free to reach out if you'd like to discuss potential opportunities.
+                    </p>
+                    <a href="mailto:soheib04ouz@gmail.com" class="inline-flex items-center text-purple-400 hover:text-purple-300 transition">
+                        <i data-lucide="calendar" class="w-5 h-5 mr-2"></i> <span data-i18n="contact.availability.schedule">Schedule a meeting</span>
+                    </a>
                 </div>
-
-                <div id="message-box" class="hidden mt-4 p-4 rounded-lg text-center font-medium transition-all duration-300 ease-in-out"></div>
-
-                <button type="submit" class="w-full py-4 bg-green-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-green-700 transition-colors duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-50">
-                    Place Order
-                </button>
-            </form>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
-            &copy; 2024 dzTech. All Rights Reserved.
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const productOptionsForm = document.getElementById('product-options-form');
-            const orderFormContainer = document.getElementById('order-form');
-            const orderNowBtn = document.getElementById('order-now-btn');
-            const clientInfoForm = document.getElementById('client-info-form');
-            const whatsappCheckbox = document.getElementById('whatsapp-order');
-            const messageBox = document.getElementById('message-box');
-            const wilayaSelect = document.getElementById('wilaya');
-            const productPriceSpan = document.getElementById('product-price');
+</main>
 
-            // Initial price
-            let basePrice = 65000;
+<!-- Footer -->
+<footer class="text-center py-8 border-t border-purple-900/20">
+    <div class="flex justify-center space-x-6 mb-4">
+        <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="github" class="w-6 h-6"></i></a>
+        <a href="https://www.linkedin.com/in/ouzeriSoheib" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+        <a href="mailto:soheib04ouz@gmail.com" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
+    </div>
+    <p class="text-gray-500">&copy; <span id="current-year"></span> Ouzeri Soheib. <span data-i18n="footer.rights">Designed & Built from scratch.</span></p>
+</footer>
 
-            // Update price based on selected options
-            productOptionsForm.addEventListener('change', () => {
-                let currentPrice = basePrice;
-                const storage = document.querySelector('input[name="storage"]:checked').value;
-                const controller = document.querySelector('input[name="controller"]:checked').value;
-                
-                if (storage === '1TB') {
-                    currentPrice += 15000; // Example price for 1TB
+<script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Language translations
+    const translations = {
+        en: {
+            "nav.home": "Home", "nav.skills": "Skills", "nav.projects": "Projects", "nav.journey": "My Journey", "nav.contact": "Contact", "nav.hire": "Hire Me", "nav.language": "Language", "nav.resume": "Resume",
+            "hero.title": "Mobile Developer", "hero.description": "A passionate mobile developer with 3+ years of experience building modern, user-friendly applications. Specializing in Kotlin Multiplatform to create seamless, high-performance experiences for both Android and iOS platforms.", "hero.view-work": "View Work", "hero.contact": "Contact Me", "hero.explore": "Explore More",
+            "skills.title": "Core Technologies", "skills.description": "I leverage modern architecture patterns like MVVM and Clean Architecture, with a strong focus on dependency injection using Dagger-Hilt and Koin.",
+            "journey.title": "My Learning Journey", "journey.description": "My path through education and self-learning in mobile development.", "journey.2021.title": "Baccalaureate & Architecture", "journey.2021.description": "Obtained my first baccalaureate and pursued architecture studies before deciding to change direction.", "journey.2022.title": "Second Baccalaureate & Computer Science", "journey.2022.description": "Retook the baccalaureate and successfully passed again, then enrolled in computer science (engineering systems) at university.", "journey.self-learning.title": "Self-Taught Development", "journey.self-learning.description": "Began learning mobile development with Kotlin and XML, then transitioned to Jetpack Compose. Now focusing on Kotlin Multiplatform for cross-platform development.", "journey.computer-security.title": "Computer Security Specialization", "journey.computer-security.description": "After completing the first two years of computer science, switched to computer security for my third year while continuing mobile development.",
+            "projects.title": "Featured Projects", "projects.tech-stack": "Tech Stack", "projects.view-code": "View Code", "projects.app-unavailable": "App Unavailable", "projects.autosmart.description": "A comprehensive mobile marketplace for cars. Features include advanced filtering, map-based search via MapBox, real-time chat, and listing management. A key feature is an ML model for predicting car prices.", "projects.hirafi.description": "A handyman marketplace platform connecting users with skilled professionals. Users can search for services, view handyman profiles, and initiate contact seamlessly.", "projects.easymoney.description": "A secure chat application for course subscribers to communicate with admins and in groups. Built with Kotlin Multiplatform for both Android & iOS, it features enhanced security to prevent screenshots and screen recording.", "projects.markcomputer.description": "A desktop Point-of-Sale (POS) and inventory management system for a computer store. It provides full sales functionalities, benefit calculation, and analytics.",
+            "resume.title": "My Resume", "resume.description": "For a detailed look at my skills, experience, and qualifications, you can download my full resume.", "resume.download": "Download CV",
+            "contact.title": "Get In Touch", "contact.description": "I'm currently open to new opportunities and collaborations. If you have a project in mind or just want to connect, feel free to reach out.", "contact.form.name": "Name", "contact.form.email": "Email", "contact.form.message": "Message", "contact.form.submit": "Send Message", "contact.info.title": "Contact Information", "contact.info.email": "Email", "contact.info.github": "GitHub", "contact.info.linkedin": "LinkedIn", "contact.availability.title": "Availability", "contact.availability.description": "I'm currently available for freelance work and full-time positions. Feel free to reach out if you'd like to discuss potential opportunities.", "contact.availability.schedule": "Schedule a meeting",
+            "footer.rights": "Designed & Built from scratch."
+        },
+        fr: {
+            "nav.home": "Accueil", "nav.skills": "Compétences", "nav.projects": "Projets", "nav.journey": "Mon Parcours", "nav.contact": "Contact", "nav.hire": "Engagez-moi", "nav.language": "Langue", "nav.resume": "CV",
+            "hero.title": "Développeur Mobile", "hero.description": "Développeur mobile passionné avec plus de 3 ans d'expérience dans la création d'applications modernes et conviviales. Spécialisé dans Kotlin Multiplatform pour créer des expériences fluides et performantes sur Android et iOS.", "hero.view-work": "Voir mon travail", "hero.contact": "Contactez-moi", "hero.explore": "Explorer plus",
+            "skills.title": "Technologies Principales", "skills.description": "J'utilise des modèles d'architecture modernes comme MVVM et Clean Architecture, avec un accent particulier sur l'injection de dépendances avec Dagger-Hilt et Koin.",
+            "journey.title": "Mon Parcours d'Apprentissage", "journey.description": "Mon chemin à travers l'éducation et l'auto-formation en développement mobile.", "journey.2021.title": "Baccalauréat & Architecture", "journey.2021.description": "Obtention de mon premier baccalauréat et poursuite d'études en architecture avant de changer d'orientation.", "journey.2022.title": "Second Baccalauréat & Informatique", "journey.2022.description": "Reprise du baccalauréat avec succès, puis inscription en informatique (systèmes d'ingénierie) à l'université.", "journey.self-learning.title": "Auto-formation en Développement", "journey.self-learning.description": "Commencement de l'apprentissage du développement mobile avec Kotlin et XML, puis transition vers Jetpack Compose. Maintenant concentré sur Kotlin Multiplatform pour le développement multiplateforme.", "journey.computer-security.title": "Spécialisation en Sécurité Informatique", "journey.computer-security.description": "Après avoir terminé les deux premières années d'informatique, je me suis orienté vers la sécurité informatique pour ma troisième année tout en continuant le développement mobile.",
+            "projects.title": "Projets Sélectionnés", "projects.tech-stack": "Technologies Utilisées", "projects.view-code": "Voir le Code", "projects.app-unavailable": "App Indisponible", "projects.autosmart.description": "Une place de marché mobile complète pour les voitures. Fonctionnalités incluant un filtrage avancé, une recherche basée sur la carte via MapBox, un chat en temps réel et une gestion des annonces. Une caractéristique clé est un modèle ML pour prédire les prix des voitures.", "projects.hirafi.description": "Une plateforme de marché pour artisans connectant les utilisateurs à des professionnels qualifiés. Les utilisateurs peuvent rechercher des services, consulter des profils d'artisans et initier un contact facilement.", "projects.easymoney.description": "Une application de chat sécurisée pour les abonnés de cours pour communiquer avec les administrateurs et en groupes. Construite avec Kotlin Multiplatform pour Android et iOS, elle propose une sécurité renforcée pour empêcher les captures d'écran et l'enregistrement d'écran.", "projects.markcomputer.description": "Un système de Point de Vente (POS) et de gestion d'inventaire pour un magasin d'informatique. Il fournit toutes les fonctionnalités de vente, le calcul des bénéfices et des analyses.",
+            "resume.title": "Mon CV", "resume.description": "Pour un aperçu détaillé de mes compétences, de mon expérience et de mes qualifications, vous pouvez télécharger mon CV complet.", "resume.download": "Télécharger le CV",
+            "contact.title": "Contactez-moi", "contact.description": "Je suis actuellement ouvert à de nouvelles opportunités et collaborations. Si vous avez un projet en tête ou souhaitez simplement discuter, n'hésitez pas à me contacter.", "contact.form.name": "Nom", "contact.form.email": "Email", "contact.form.message": "Message", "contact.form.submit": "Envoyer le Message", "contact.info.title": "Coordonnées", "contact.info.email": "Email", "contact.info.github": "GitHub", "contact.info.linkedin": "LinkedIn", "contact.availability.title": "Disponibilité", "contact.availability.description": "Je suis actuellement disponible pour des missions freelance et des postes à temps plein. N'hésitez pas à me contacter pour discuter d'opportunités potentielles.", "contact.availability.schedule": "Planifier un rendez-vous",
+            "footer.rights": "Conçu et Développé à partir de zéro."
+        },
+        ar: {
+            "nav.home": "الرئيسية", "nav.skills": "المهارات", "nav.projects": "المشاريع", "nav.journey": "رحلتي", "nav.contact": "اتصل بي", "nav.hire": "وظفني", "nav.language": "اللغة", "nav.resume": "السيرة الذاتية",
+            "hero.title": "مطور تطبيقات محمولة", "hero.description": "مطور تطبيقات محمولة شغوف بأكثر من 3 سنوات خبرة في بناء تطبيات حديثة وسهلة الاستخدام. متخصص في Kotlin Multiplatform لإنشاء تجارب سلسة وعالية الأداء لكل من منصتي Android و iOS.", "hero.view-work": "عرض الأعمال", "hero.contact": "اتصل بي", "hero.explore": "استكشف المزيد",
+            "skills.title": "التقنيات الأساسية", "skills.description": "أستخدم أنماط معمارية حديثة مثل MVVM و Clean Architecture، مع تركيز قوي على حقن التبعيات باستخدام Dagger-Hilt و Koin.",
+            "journey.title": "رحلتي التعليمية", "journey.description": "مسيرتي عبر التعليم والتعلم الذاتي في تطوير التطبيقات المحمولة.", "journey.2021.title": "البكالوريا والهندسة المعمارية", "journey.2021.description": "حصولي على شهادة البكالوريا الأولى ودراسة الهندسة المعمارية قبل تغيير المسار.", "journey.2022.title": "البكالوريا الثانية وعلوم الحاسوب", "journey.2022.description": "إعادة اجتياز البكالوريا بنجاح ثم التسجيل في علوم الحاسوب (أنظمة هندسية) في الجامعة.", "journey.self-learning.title": "التعلم الذاتي في التطوير", "journey.self-learning.description": "بدأت تعلم تطوير التطبيقات المحمولة باستخدام Kotlin و XML، ثم انتقلت إلى Jetpack Compose. الآن أركز على Kotlin Multiplatform لتطوير تطبيقات متعددة المنصات.", "journey.computer-security.title": "تخصص أمن الحاسوب", "journey.computer-security.description": "بعد إتمام السنتين الأولى من علوم الحاسوب، تحولت إلى أمن الحاسوب في سنتي الثالثة مع الاستمرار في تطوير التطبيقات المحمولة.",
+            "projects.title": "أبرز المشاريع", "projects.tech-stack": "التقنيات المستخدمة", "projects.view-code": "عرض الكود", "projects.app-unavailable": "التطبيق غير متاح", "projects.autosmart.description": "سوق متكامل للسيارات على الهاتف المحمول. يتضمن ميزات مثل الفلترة المتقدمة، البحث عبر الخرائط باستخدام MapBox، الدردشة الفورية وإدارة الإعلانات. الميزة الرئيسية هي نموذج تعلم آلي للتنبؤ بأسعار السيارات.", "projects.hirafi.description": "منصة سوق للحرفيين تربط المستخدمين بالمحترفين المهرة. يمكن للمستخدمين البحث عن الخدمات، مشاهدة ملفات الحرفيين وبدء التواصل بسهولة.", "projects.easymoney.description": "تطبيق دردشة آمن لمشتركي الدورات للتواصل مع المشرفين وفي المجموعات. مبني باستخدام Kotlin Multiplatform لكل من Android و iOS، ويتميز بأمان محسن لمنع لقطات الشاشة وتسجيل الشاشة.", "projects.markcomputer.description": "نظام نقطة بيع (POS) وإدارة مخزون لمتجر حاسوب. يوفر جميع وظائف البيع، حساب الأرباح والتحليلات.",
+            "resume.title": "سيرتي الذاتية", "resume.description": "لإلقاء نظرة مفصلة على مهاراتي وخبراتي ومؤهلاتي، يمكنك تحميل سيرتي الذاتية الكاملة.", "resume.download": "تحميل السيرة الذاتية",
+            "contact.title": "تواصل معي", "contact.description": "أنا حاليا متاح لفرص جديدة وتعاونات. إذا كان لديك مشروع في ذهنك أو تريد فقط التواصل، لا تتردد في مراسلتي.", "contact.form.name": "الاسم", "contact.form.email": "البريد الإلكتروني", "contact.form.message": "الرسالة", "contact.form.submit": "إرسال الرسالة", "contact.info.title": "معلومات التواصل", "contact.info.email": "البريد الإلكتروني", "contact.info.github": "GitHub", "contact.info.linkedin": "LinkedIn", "contact.availability.title": "التوفر", "contact.availability.description": "أنا حاليا متاح للعمل الحر والوظائف الدائمة. لا تتردد في التواصل إذا كنت ترغب في مناقشة الفرص المحتملة.", "contact.availability.schedule": "جدولة اجتماع",
+            "footer.rights": "مصمم ومطور من الصفر."
+        }
+    };
+
+    // JavaScript for scroll-triggered fade-in animations
+    document.addEventListener("DOMContentLoaded", () => {
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Language switcher functionality
+        let currentLanguage = 'en';
+        const languageOptions = document.querySelectorAll('.language-option, .language-btn');
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.getElementById('current-language').textContent = lang.toUpperCase();
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
                 }
-                
-                if (controller === 'Extra') {
-                    currentPrice += 10000; // Example price for extra controller
-                }
-                
-                productPriceSpan.textContent = currentPrice.toLocaleString('en-DZ');
             });
 
-            // Show the order form on button click
-            orderNowBtn.addEventListener('click', () => {
-                orderFormContainer.style.display = 'block';
-                orderFormContainer.scrollIntoView({ behavior: 'smooth' });
-            });
-
-            // Handle form submission
-            clientInfoForm.addEventListener('submit', (event) => {
-                event.preventDefault();
-
-                const formData = new FormData(clientInfoForm);
-                const data = Object.fromEntries(formData.entries());
-                const productOptions = Object.fromEntries(new FormData(productOptionsForm).entries());
-
-                const orderDetails = `
-                    Product: Xbox Series S
-                    Color: ${productOptions.color}
-                    Storage: ${productOptions.storage}
-                    Controller: ${productOptions.controller}
-                    Price: ${productPriceSpan.textContent} DZD
-                    ---
-                    Client Name: ${data.fullName}
-                    Phone: ${data.phoneNumber}
-                    Wilaya: ${data.wilaya}
-                    City: ${data.city}
-                `.replace(/^\s+/gm, ''); // Trim leading whitespace
-
-                if (whatsappCheckbox.checked) {
-                    const whatsappUrl = `https://wa.me/+213799999999?text=${encodeURIComponent(orderDetails)}`;
-                    window.open(whatsappUrl, '_blank');
-                    displayMessage('Order details opened in WhatsApp. Please send the message to complete your order!', 'bg-blue-200 text-blue-800');
+            // Update active language button in mobile menu
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.remove('bg-transparent', 'text-gray-400');
+                    btn.classList.add('bg-purple-900/30', 'text-white');
                 } else {
-                    // This is where you would send the data to a backend server.
-                    // For this example, we'll just display a success message.
-                    console.log('Order submitted:', { data, productOptions });
-                    displayMessage('Your order has been placed successfully!', 'bg-green-200 text-green-800');
-                    clientInfoForm.reset(); // Reset form after successful submission
+                    btn.classList.remove('bg-purple-900/30', 'text-white');
+                    btn.classList.add('bg-transparent', 'text-gray-400');
                 }
             });
 
-            function displayMessage(message, classes) {
-                messageBox.textContent = message;
-                messageBox.className = `${classes} mt-4 p-4 rounded-lg text-center font-medium`;
-                messageBox.style.display = 'block';
+            // Set direction for Arabic
+            if (lang === 'ar') {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+            } else {
+                document.documentElement.dir = 'ltr';
+                document.documentElement.lang = lang;
+            }
+        }
+
+        languageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.dataset.lang;
+                changeLanguage(lang);
+
+                // Close mobile menu if language was changed from there
+                if (option.classList.contains('language-btn')) {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Initialize with English
+        changeLanguage('en');
+
+        // Intersection Observer for animations
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+
+                    // Animate skill meters when they become visible
+                    if (entry.target.id === 'skills') {
+                        const skillLevels = document.querySelectorAll('.skill-level');
+                        skillLevels.forEach(level => {
+                            const targetWidth = level.style.width; // Store the target width
+                            level.style.width = '0'; // Reset for animation
+                            setTimeout(() => {
+                                level.style.width = targetWidth; // Animate to the target width
+                            }, 100);
+                        });
+                    }
+                }
+            });
+        }, {
+            rootMargin: '0px',
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Typed.js initialization
+        if (document.getElementById('typed-title')) {
+            new Typed('#typed-title', {
+                strings: ['Mobile Developer', 'Kotlin Multiplatform Expert', 'Android & iOS Specialist', 'Problem Solver'],
+                typeSpeed: 50,
+                backSpeed: 30,
+                loop: true,
+                smartBackspace: true,
+            });
+        }
+
+        // JavaScript for Project Galleries
+        const galleries = document.querySelectorAll('.project-gallery');
+        galleries.forEach(gallery => {
+            const slides = gallery.querySelector('.project-slides');
+            const prevButton = gallery.querySelector('.prev');
+            const nextButton = gallery.querySelector('.next');
+            const slideCount = slides.children.length;
+            let currentIndex = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            // Add indicators if more than one slide
+            if (slideCount > 1) {
+                const indicators = document.createElement('div');
+                indicators.className = 'gallery-indicators flex justify-center mt-4 space-x-2';
+
+                for (let i = 0; i < slideCount; i++) {
+                    const indicator = document.createElement('button');
+                    indicator.className = `indicator w-2 h-2 rounded-full ${i === 0 ? 'bg-purple-500' : 'bg-gray-500'}`;
+                    indicator.setAttribute('aria-label', `Go to slide ${i + 1}`);
+                    indicator.addEventListener('click', () => {
+                        currentIndex = i;
+                        updateGallery();
+                    });
+                    indicators.appendChild(indicator);
+                }
+
+                gallery.appendChild(indicators);
+            }
+
+            function updateGallery() {
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // Update active indicator
+                if (slideCount > 1) {
+                    const indicators = gallery.querySelectorAll('.indicator');
+                    indicators.forEach((indicator, i) => {
+                        indicator.classList.toggle('bg-purple-500', i === currentIndex);
+                        indicator.classList.toggle('bg-gray-500', i !== currentIndex);
+                    });
+                }
+            }
+
+            // Navigation buttons
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                updateGallery();
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateGallery();
+            });
+
+            // Touch support for mobile
+            gallery.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, {passive: true});
+
+            gallery.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, {passive: true});
+
+            function handleSwipe() {
+                const threshold = 50; // Minimum swipe distance
+                if (touchStartX - touchEndX > threshold) {
+                    // Swipe left - next
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateGallery();
+                } else if (touchEndX - startX > threshold) {
+                    // Swipe right - previous
+                    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                    updateGallery();
+                }
+            }
+
+            // Keyboard navigation
+            gallery.setAttribute('tabindex', '0');
+            gallery.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                    updateGallery();
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateGallery();
+                }
+            });
+
+            // Auto-advance if more than one slide
+            if (slideCount > 1) {
+                let interval = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % slideCount;
+                    updateGallery();
+                }, 5000);
+
+                gallery.addEventListener('mouseenter', () => clearInterval(interval));
+                gallery.addEventListener('mouseleave', () => {
+                    interval = setInterval(() => {
+                        currentIndex = (currentIndex + 1) % slideCount;
+                        updateGallery();
+                    }, 5000);
+                });
             }
         });
-    </script>
 
+        // Form submission handling
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const submitText = document.getElementById('submit-text');
+                const submitSpinner = document.getElementById('submit-spinner');
+                const formData = new FormData(contactForm);
+
+                // Show loading state
+                submitText.textContent = 'Sending...';
+                submitSpinner.classList.remove('hidden');
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        submitText.textContent = 'Message Sent!';
+                        contactForm.reset();
+                    } else {
+                        submitText.textContent = 'Error sending message';
+                    }
+                } catch (error) {
+                    submitText.textContent = 'Error sending message';
+                } finally {
+                    submitSpinner.classList.add('hidden');
+
+                    // Reset button text after 3 seconds
+                    setTimeout(() => {
+                        submitText.textContent = 'Send Message';
+                    }, 3000);
+                }
+            });
+        }
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
 </body>
-
 </html>
-
