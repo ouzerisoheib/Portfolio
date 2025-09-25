@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +8,10 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter + Arabic font -->
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,15 +19,9 @@
     <style>
         /* Custom styles for a polished look */
         body {
-            font-family: 'Inter', 'Tajawal', sans-serif;
+            font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            transition: all 0.3s ease;
-        }
-
-        body.rtl {
-            direction: rtl;
-            text-align: right;
         }
 
         .active-thumbnail {
@@ -69,120 +62,6 @@
             animation: fadeIn 0.5s ease-out forwards;
         }
         
-        /* Language Selector Styles */
-        .language-selector {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .language-button {
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .language-button:hover {
-            border-color: #ca8a04;
-        }
-        
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            min-width: 140px;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-        
-        .language-dropdown.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        
-        .language-option {
-            display: flex;
-            align-items: center;
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-        
-        .language-option:hover {
-            background: #f9fafb;
-        }
-        
-        .language-option.active {
-            background: #fefce8;
-            color: #ca8a04;
-        }
-        
-        .language-flag {
-            width: 20px;
-            height: 15px;
-            margin-right: 10px;
-            border-radius: 2px;
-        }
-        
-        body.rtl .language-flag {
-            margin-right: 0;
-            margin-left: 10px;
-        }
-        
-        /* RTL-specific adjustments */
-        body.rtl .text-right {
-            text-align: left;
-        }
-        
-        body.rtl .text-left {
-            text-align: right;
-        }
-        
-        body.rtl .ml-2 {
-            margin-left: 0;
-            margin-right: 0.5rem;
-        }
-        
-        body.rtl .mr-2 {
-            margin-right: 0;
-            margin-left: 0.5rem;
-        }
-        
-        body.rtl .ml-3 {
-            margin-left: 0;
-            margin-right: 0.75rem;
-        }
-        
-        body.rtl .mr-3 {
-            margin-right: 0;
-            margin-left: 0.75rem;
-        }
-        
-        body.rtl .space-x-6 > :not([hidden]) ~ :not([hidden]) {
-            --tw-space-x-reverse: 1;
-        }
-        
-        body.rtl .flex-row-reverse {
-            flex-direction: row;
-        }
-        
-        body.rtl .text-xl {
-            font-size: 1.25rem;
-            line-height: 1.75rem;
-        }
-        
         /* Floating Action Button Styles */
         .fab-container {
             position: fixed;
@@ -192,12 +71,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-        }
-        
-        body.rtl .fab-container {
-            right: auto;
-            left: 30px;
-            align-items: flex-start;
         }
         
         .fab-main {
@@ -237,18 +110,8 @@
             pointer-events: none;
         }
         
-        body.rtl .fab-label {
-            right: auto;
-            left: 70px;
-            transform: translateX(-10px);
-        }
-        
         .fab-main:hover .fab-label {
             opacity: 1;
-            transform: translateX(0);
-        }
-        
-        body.rtl .fab-main:hover .fab-label {
             transform: translateX(0);
         }
         
@@ -305,19 +168,72 @@
             pointer-events: none;
         }
         
-        body.rtl .fab-option-label {
-            right: auto;
-            left: 55px;
-            transform: translateX(-10px);
-        }
-        
         .fab-option:hover .fab-option-label {
             opacity: 1;
             transform: translateX(0);
         }
         
-        body.rtl .fab-option:hover .fab-option-label {
-            transform: translateX(0);
+        /* Quick Order Modal */
+        .quick-order-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .quick-order-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .quick-order-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .quick-order-modal.active .quick-order-content {
+            transform: scale(1);
+        }
+        
+        .quick-order-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .quick-order-body {
+            padding: 20px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6b7280;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .close-modal:hover {
+            color: #374151;
         }
         
         /* Responsive adjustments */
@@ -325,11 +241,6 @@
             .fab-container {
                 bottom: 20px;
                 right: 20px;
-            }
-            
-            body.rtl .fab-container {
-                right: auto;
-                left: 20px;
             }
             
             .fab-main {
@@ -351,11 +262,6 @@
                 right: 15px;
             }
             
-            body.rtl .fab-container {
-                right: auto;
-                left: 15px;
-            }
-            
             .fab-main {
                 width: 52px;
                 height: 52px;
@@ -375,40 +281,19 @@
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
-    <!-- Language Selector -->
-    <div class="fixed top-4 right-4 z-50 language-selector">
-        <div class="language-button" id="language-button">
-            <span class="current-language" id="current-language">EN</span>
-            <i class="fas fa-chevron-down ml-2 text-sm"></i>
-        </div>
-        <div class="language-dropdown" id="language-dropdown">
-            <div class="language-option active" data-lang="en">
-                <div class="language-flag" style="background: linear-gradient(to bottom, #012169, #C8102E);"></div>
-                <span>English</span>
-            </div>
-            <div class="language-option" data-lang="fr">
-                <div class="language-flag" style="background: linear-gradient(to right, #0055A4, white, #EF4135);"></div>
-                <span>Français</span>
-            </div>
-            <div class="language-option" data-lang="ar">
-                <div class="language-flag" style="background: linear-gradient(to bottom, #CE1126, white, #007A3D);"></div>
-                <span>العربية</span>
-            </div>
-        </div>
-    </div>
 
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-40">
+    <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-gray-900 tracking-wider">
                 <i class="fas fa-clock text-yellow-600"></i>
-                <span class="brand-name">Hamid<span class="font-light">Watches</span></span>
+                Hamid<span class="font-light">Watches</span>
             </a>
             <div class="hidden md:flex space-x-6 items-center">
-                <a href="#" class="nav-link text-gray-600 hover:text-yellow-600 transition duration-300" data-key="men">Men</a>
-                <a href="#" class="nav-link text-gray-600 hover:text-yellow-600 transition duration-300" data-key="women">Women</a>
-                <a href="#" class="nav-link text-gray-600 hover:text-yellow-600 transition duration-300" data-key="newArrivals">New Arrivals</a>
-                <a href="#" class="nav-link text-gray-600 hover:text-yellow-600 transition duration-300" data-key="contact">Contact</a>
+                <a href="#" class="text-gray-600 hover:text-yellow-600 transition duration-300">Men</a>
+                <a href="#" class="text-gray-600 hover:text-yellow-600 transition duration-300">Women</a>
+                <a href="#" class="text-gray-600 hover:text-yellow-600 transition duration-300">New Arrivals</a>
+                <a href="#" class="text-gray-600 hover:text-yellow-600 transition duration-300">Contact</a>
             </div>
             <button class="md:hidden">
                 <i class="fas fa-bars text-2xl"></i>
@@ -442,18 +327,18 @@
                 <!-- Product Details & Order Form -->
                 <div class="p-6 lg:p-8 flex flex-col justify-between">
                     <div>
-                        <span class="text-sm font-semibold text-yellow-600 uppercase tracking-widest category-label">Men's Collection</span>
-                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-2 mb-4 product-title">The Chronomaster Pro</h1>
-                        <p class="text-gray-600 text-lg mb-6 product-description">
+                        <span class="text-sm font-semibold text-yellow-600 uppercase tracking-widest">Men's Collection</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-2 mb-4">The Chronomaster Pro</h1>
+                        <p class="text-gray-600 text-lg mb-6">
                             Experience precision and style. The Chronomaster Pro is crafted with a stainless steel case, sapphire crystal glass, and a self-winding automatic movement. Perfect for the modern gentleman.
                         </p>
-                        <div class="text-4xl font-bold text-gray-900 mb-6 price-container">
-                            28,500 <span class="text-2xl font-medium text-gray-500 currency">DZD</span>
+                        <div class="text-4xl font-bold text-gray-900 mb-6">
+                            28,500 <span class="text-2xl font-medium text-gray-500">DZD</span>
                         </div>
 
                         <!-- Color Options -->
                         <div class="mb-6">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3 color-label">Select Color:</h3>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Select Color:</h3>
                             <div class="flex items-center space-x-4">
                                 <button class="color-swatch w-8 h-8 rounded-full bg-gray-800 ring-2 ring-offset-2 ring-gray-800 active-color-swatch" data-color="black" title="Onyx Black"></button>
                                 <button class="color-swatch w-8 h-8 rounded-full bg-blue-900" data-color="blue" title="Midnight Blue"></button>
@@ -463,37 +348,37 @@
 
                         <!-- Features -->
                         <div class="border-t border-b border-gray-200 py-4 mb-6">
-                            <ul class="space-y-2 text-gray-700 features-list">
-                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> <span>42mm Stainless Steel Case</span></li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> <span>Automatic Chronograph Movement</span></li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> <span>Water Resistant up to 100m</span></li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> <span>2-Year International Warranty</span></li>
+                            <ul class="space-y-2 text-gray-700">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> 42mm Stainless Steel Case</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Automatic Chronograph Movement</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Water Resistant up to 100m</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> 2-Year International Warranty</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Order Form -->
                     <div id="order-form">
-                        <h2 class="text-2xl font-bold text-center mb-4 text-gray-800 order-title">Order Now</h2>
-                        <p class="text-center text-gray-500 mb-6 order-subtitle">Fill in your details for delivery.</p>
+                        <h2 class="text-2xl font-bold text-center mb-4 text-gray-800">Order Now</h2>
+                        <p class="text-center text-gray-500 mb-6">Fill in your details for delivery.</p>
                         
                         <form id="delivery-form" class="space-y-4">
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 name-label">Full Name</label>
+                                <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
                                 <input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
                             </div>
                             <div>
-                                <label for="phone" class="block text-sm font-medium text-gray-700 phone-label">Phone Number</label>
+                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
                                 <input type="tel" id="phone" name="phone" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
                             </div>
                             <div>
-                                <label for="city" class="block text-sm font-medium text-gray-700 city-label">City</label>
+                                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
                                 <input type="text" id="city" name="city" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
                             </div>
                             <div>
-                                <label for="state" class="block text-sm font-medium text-gray-700 state-label">State (Wilaya)</label>
+                                <label for="state" class="block text-sm font-medium text-gray-700">State (Wilaya)</label>
                                 <select id="state" name="state" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
-                                    <option value="" class="select-wilaya">Select your Wilaya</option>
+                                    <option value="">Select your Wilaya</option>
                                     <option value="Adrar">Adrar</option>
                                     <option value="Chlef">Chlef</option>
                                     <option value="Laghouat">Laghouat</option>
@@ -517,15 +402,15 @@
                                     <!-- Add all 58 wilayas for a complete list -->
                                 </select>
                             </div>
-                            <button type="submit" class="w-full bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all duration-300 transform hover:scale-105 confirm-order-btn">
-                                <i class="fas fa-paper-plane mr-2"></i> <span>Confirm Order</span>
+                            <button type="submit" class="w-full bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-paper-plane mr-2"></i> Confirm Order
                             </button>
                         </form>
                         
-                        <div class="text-center my-4 text-gray-500 font-semibold or-divider">OR</div>
+                        <div class="text-center my-4 text-gray-500 font-semibold">OR</div>
 
-                        <a href="https://wa.me/213000000000?text=Hello%20Hamid%20Watches,%20I'm%20interested%20in%20the%20Chronomaster%20Pro." target="_blank" class="w-full flex items-center justify-center bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-300 transform hover:scale-105 whatsapp-btn">
-                            <i class="fab fa-whatsapp text-xl mr-3"></i> <span>Order via WhatsApp</span>
+                        <a href="https://wa.me/213000000000?text=Hello%20Hamid%20Watches,%20I'm%20interested%20in%20the%20Chronomaster%20Pro." target="_blank" class="w-full flex items-center justify-center bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-300 transform hover:scale-105">
+                            <i class="fab fa-whatsapp text-xl mr-3"></i> Order via WhatsApp
                         </a>
                     </div>
                 </div>
@@ -538,19 +423,19 @@
         <div class="container mx-auto px-6 py-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
                 <div>
-                    <h3 class="text-xl font-bold mb-4 brand-name-footer">Hamid Watches Collection</h3>
-                    <p class="text-gray-400 footer-description">The finest timepieces for every occasion. Quality and elegance delivered to your doorstep.</p>
+                    <h3 class="text-xl font-bold mb-4">Hamid Watches Collection</h3>
+                    <p class="text-gray-400">The finest timepieces for every occasion. Quality and elegance delivered to your doorstep.</p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4 quick-links-title">Quick Links</h3>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white about-link">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white shipping-link">Shipping Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white privacy-link">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Shipping Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4 follow-us-title">Follow Us</h3>
+                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
                     <div class="flex justify-center md:justify-start space-x-6">
                         <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-instagram"></i></a>
@@ -558,7 +443,7 @@
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500 copyright-text">
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
                 <p>&copy; 2024 Hamid Watches Collection. All Rights Reserved.</p>
             </div>
         </div>
@@ -570,9 +455,9 @@
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <i class="fas fa-check text-green-500 text-4xl"></i>
             </div>
-            <h2 class="text-2xl font-bold text-gray-800 mb-2 success-title">Order Placed!</h2>
-            <p class="text-gray-600 mb-6 success-message">Thank you! We have received your order and will contact you shortly for confirmation.</p>
-            <button id="close-modal" class="bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-700 transition close-btn">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Order Placed!</h2>
+            <p class="text-gray-600 mb-6">Thank you! We have received your order and will contact you shortly for confirmation.</p>
+            <button id="close-modal" class="bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-700 transition">
                 Close
             </button>
         </div>
@@ -583,299 +468,59 @@
         <div class="fab-options" id="fab-options">
             <div class="fab-option" id="fab-whatsapp">
                 <i class="fab fa-whatsapp"></i>
-                <span class="fab-option-label fab-whatsapp-label">Order via WhatsApp</span>
+                <span class="fab-option-label">Order via WhatsApp</span>
             </div>
             <div class="fab-option" id="fab-quick-order">
                 <i class="fas fa-bolt"></i>
-                <span class="fab-option-label fab-quick-label">Quick Order</span>
+                <span class="fab-option-label">Quick Order</span>
             </div>
             <div class="fab-option" id="fab-scroll-top">
                 <i class="fas fa-arrow-up"></i>
-                <span class="fab-option-label fab-top-label">Back to Top</span>
+                <span class="fab-option-label">Back to Top</span>
             </div>
         </div>
         <div class="fab-main" id="fab-main">
             <i class="fas fa-shopping-cart"></i>
-            <span class="fab-label fab-main-label">Quick Actions</span>
+            <span class="fab-label">Quick Actions</span>
+        </div>
+    </div>
+
+    <!-- Quick Order Modal -->
+    <div class="quick-order-modal" id="quick-order-modal">
+        <div class="quick-order-content">
+            <div class="quick-order-header">
+                <h3 class="text-xl font-bold text-gray-800">Quick Order - Chronomaster Pro</h3>
+                <button class="close-modal" id="close-quick-order">&times;</button>
+            </div>
+            <div class="quick-order-body">
+                <div class="flex items-center mb-4">
+                    <img src="https://placehold.co/80x80/1a1a1a/ffffff?text=CP" alt="Chronomaster Pro" class="rounded-md mr-4">
+                    <div>
+                        <h4 class="font-bold text-gray-800">Chronomaster Pro</h4>
+                        <p class="text-yellow-600 font-bold">28,500 DZD</p>
+                        <p class="text-sm text-gray-600" id="quick-order-color">Color: Onyx Black</p>
+                    </div>
+                </div>
+                
+                <form id="quick-order-form" class="space-y-4">
+                    <div>
+                        <label for="quick-name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="quick-name" name="name" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="quick-phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                        <input type="tel" id="quick-phone" name="phone" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    </div>
+                    <button type="submit" class="w-full bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all duration-300">
+                        <i class="fas fa-paper-plane mr-2"></i> Complete Quick Order
+                    </button>
+                </form>
+                <p class="text-xs text-gray-500 mt-4 text-center">We'll contact you within 24 hours to confirm your order and delivery details.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Language data
-        const translations = {
-            en: {
-                // Navigation
-                men: "Men",
-                women: "Women",
-                newArrivals: "New Arrivals",
-                contact: "Contact",
-                
-                // Product details
-                category: "Men's Collection",
-                productTitle: "The Chronomaster Pro",
-                productDescription: "Experience precision and style. The Chronomaster Pro is crafted with a stainless steel case, sapphire crystal glass, and a self-winding automatic movement. Perfect for the modern gentleman.",
-                price: "28,500",
-                currency: "DZD",
-                
-                // Color selection
-                colorLabel: "Select Color:",
-                colorBlack: "Onyx Black",
-                colorBlue: "Midnight Blue",
-                colorGreen: "Forest Green",
-                
-                // Features
-                feature1: "42mm Stainless Steel Case",
-                feature2: "Automatic Chronograph Movement",
-                feature3: "Water Resistant up to 100m",
-                feature4: "2-Year International Warranty",
-                
-                // Order form
-                orderTitle: "Order Now",
-                orderSubtitle: "Fill in your details for delivery.",
-                nameLabel: "Full Name",
-                phoneLabel: "Phone Number",
-                cityLabel: "City",
-                stateLabel: "State (Wilaya)",
-                selectWilaya: "Select your Wilaya",
-                confirmOrder: "Confirm Order",
-                orDivider: "OR",
-                whatsappOrder: "Order via WhatsApp",
-                
-                // Footer
-                brandName: "Hamid Watches Collection",
-                footerDescription: "The finest timepieces for every occasion. Quality and elegance delivered to your doorstep.",
-                quickLinks: "Quick Links",
-                aboutUs: "About Us",
-                shippingPolicy: "Shipping Policy",
-                privacyPolicy: "Privacy Policy",
-                followUs: "Follow Us",
-                copyright: "© 2024 Hamid Watches Collection. All Rights Reserved.",
-                
-                // Success modal
-                successTitle: "Order Placed!",
-                successMessage: "Thank you! We have received your order and will contact you shortly for confirmation.",
-                closeBtn: "Close",
-                
-                // FAB labels
-                fabMainLabel: "Quick Actions",
-                fabWhatsappLabel: "Order via WhatsApp",
-                fabQuickLabel: "Quick Order",
-                fabTopLabel: "Back to Top"
-            },
-            fr: {
-                // Navigation
-                men: "Hommes",
-                women: "Femmes",
-                newArrivals: "Nouveautés",
-                contact: "Contact",
-                
-                // Product details
-                category: "Collection Homme",
-                productTitle: "Le Chronomaster Pro",
-                productDescription: "Découvrez la précision et le style. Le Chronomaster Pro est fabriqué avec un boîtier en acier inoxydable, un verre saphir et un mouvement automatique. Parfait pour l'homme moderne.",
-                price: "28,500",
-                currency: "DZD",
-                
-                // Color selection
-                colorLabel: "Choisir la couleur :",
-                colorBlack: "Noir Onyx",
-                colorBlue: "Bleu Minuit",
-                colorGreen: "Vert Forêt",
-                
-                // Features
-                feature1: "Boîtier en acier inoxydable 42mm",
-                feature2: "Mouvement chronographe automatique",
-                feature3: "Résistant à l'eau jusqu'à 100m",
-                feature4: "Garantie internationale de 2 ans",
-                
-                // Order form
-                orderTitle: "Commander Maintenant",
-                orderSubtitle: "Remplissez vos coordonnées pour la livraison.",
-                nameLabel: "Nom Complet",
-                phoneLabel: "Numéro de Téléphone",
-                cityLabel: "Ville",
-                stateLabel: "Wilaya",
-                selectWilaya: "Sélectionnez votre Wilaya",
-                confirmOrder: "Confirmer la Commande",
-                orDivider: "OU",
-                whatsappOrder: "Commander via WhatsApp",
-                
-                // Footer
-                brandName: "Collection Montres Hamid",
-                footerDescription: "Les montres les plus fines pour chaque occasion. Qualité et élégance livrées à votre porte.",
-                quickLinks: "Liens Rapides",
-                aboutUs: "À Propos de Nous",
-                shippingPolicy: "Politique de Livraison",
-                privacyPolicy: "Politique de Confidentialité",
-                followUs: "Suivez-Nous",
-                copyright: "© 2024 Collection Montres Hamid. Tous droits réservés.",
-                
-                // Success modal
-                successTitle: "Commande Passée !",
-                successMessage: "Merci ! Nous avons reçu votre commande et vous contacterons sous peu pour confirmation.",
-                closeBtn: "Fermer",
-                
-                // FAB labels
-                fabMainLabel: "Actions Rapides",
-                fabWhatsappLabel: "Commander via WhatsApp",
-                fabQuickLabel: "Commande Rapide",
-                fabTopLabel: "Retour en Haut"
-            },
-            ar: {
-                // Navigation
-                men: "رجالي",
-                women: "نسائي",
-                newArrivals: "وصل حديثاً",
-                contact: "اتصل بنا",
-                
-                // Product details
-                category: "مجموعة رجالي",
-                productTitle: "الكرونوماستر برو",
-                productDescription: "جرب الدقة والأناقة. تم صنع الكرونوماستر برو بحافظة من الفولاذ المقاوم للصدأ، وزجاج من الكريستال الصفير، وحركة أوتوماتيكية. مثالي للرجل العصري.",
-                price: "28,500",
-                currency: "دينار جزائري",
-                
-                // Color selection
-                colorLabel: "اختر اللون:",
-                colorBlack: "أسود أونيكس",
-                colorBlue: "أزرق منتصف الليل",
-                colorGreen: "أخضر الغابة",
-                
-                // Features
-                feature1: "حافظة من الفولاذ المقاوم للصدأ 42 ملم",
-                feature2: "حركة كرونوغراف أوتوماتيكية",
-                feature3: "مقاوم للماء حتى عمق 100 متر",
-                feature4: "ضمان دولي لمدة سنتين",
-                
-                // Order form
-                orderTitle: "اطلب الآن",
-                orderSubtitle: "املأ بياناتك للتوصيل.",
-                nameLabel: "الاسم الكامل",
-                phoneLabel: "رقم الهاتف",
-                cityLabel: "المدينة",
-                stateLabel: "الولاية",
-                selectWilaya: "اختر ولايتك",
-                confirmOrder: "تأكيد الطلب",
-                orDivider: "أو",
-                whatsappOrder: "اطلب عبر واتساب",
-                
-                // Footer
-                brandName: "مجموعة ساعات حميد",
-                footerDescription: "أرقى الساعات لكل مناسبة. الجودة والأناقة تُقدم إلى عتبة داركم.",
-                quickLinks: "روابط سريعة",
-                aboutUs: "من نحن",
-                shippingPolicy: "سياسة الشحن",
-                privacyPolicy: "سياسة الخصوصية",
-                followUs: "تابعنا",
-                copyright: "© 2024 مجموعة ساعات حميد. جميع الحقوق محفوظة.",
-                
-                // Success modal
-                successTitle: "تم تقديم الطلب!",
-                successMessage: "شكراً لك! لقد استلمنا طلبك وسنتصل بك قريباً للتأكيد.",
-                closeBtn: "إغلاق",
-                
-                // FAB labels
-                fabMainLabel: "إجراءات سريعة",
-                fabWhatsappLabel: "اطلب عبر واتساب",
-                fabQuickLabel: "طلب سريع",
-                fabTopLabel: "العودة للأعلى"
-            }
-        };
-
-        // Current language
-        let currentLang = 'en';
-
-        // Function to change language
-        function changeLanguage(lang) {
-            currentLang = lang;
-            
-            // Update HTML direction for RTL languages
-            if (lang === 'ar') {
-                document.body.classList.add('rtl');
-                document.documentElement.setAttribute('dir', 'rtl');
-                document.documentElement.setAttribute('lang', 'ar');
-            } else {
-                document.body.classList.remove('rtl');
-                document.documentElement.setAttribute('dir', 'ltr');
-                document.documentElement.setAttribute('lang', lang);
-            }
-            
-            // Update all translatable elements
-            document.querySelectorAll('[data-key]').forEach(element => {
-                const key = element.getAttribute('data-key');
-                if (translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-            
-            // Update specific elements by class
-            document.querySelector('.category-label').textContent = translations[lang].category;
-            document.querySelector('.product-title').textContent = translations[lang].productTitle;
-            document.querySelector('.product-description').textContent = translations[lang].productDescription;
-            document.querySelector('.price-container').innerHTML = `${translations[lang].price} <span class="text-2xl font-medium text-gray-500 currency">${translations[lang].currency}</span>`;
-            document.querySelector('.color-label').textContent = translations[lang].colorLabel;
-            
-            // Update features list
-            const features = document.querySelectorAll('.features-list span');
-            features[0].textContent = translations[lang].feature1;
-            features[1].textContent = translations[lang].feature2;
-            features[2].textContent = translations[lang].feature3;
-            features[3].textContent = translations[lang].feature4;
-            
-            // Update form labels
-            document.querySelector('.order-title').textContent = translations[lang].orderTitle;
-            document.querySelector('.order-subtitle').textContent = translations[lang].orderSubtitle;
-            document.querySelector('.name-label').textContent = translations[lang].nameLabel;
-            document.querySelector('.phone-label').textContent = translations[lang].phoneLabel;
-            document.querySelector('.city-label').textContent = translations[lang].cityLabel;
-            document.querySelector('.state-label').textContent = translations[lang].stateLabel;
-            document.querySelector('.select-wilaya').textContent = translations[lang].selectWilaya;
-            document.querySelector('.confirm-order-btn span').textContent = translations[lang].confirmOrder;
-            document.querySelector('.or-divider').textContent = translations[lang].orDivider;
-            document.querySelector('.whatsapp-btn span').textContent = translations[lang].whatsappOrder;
-            
-            // Update footer
-            document.querySelector('.brand-name-footer').textContent = translations[lang].brandName;
-            document.querySelector('.footer-description').textContent = translations[lang].footerDescription;
-            document.querySelector('.quick-links-title').textContent = translations[lang].quickLinks;
-            document.querySelector('.about-link').textContent = translations[lang].aboutUs;
-            document.querySelector('.shipping-link').textContent = translations[lang].shippingPolicy;
-            document.querySelector('.privacy-link').textContent = translations[lang].privacyPolicy;
-            document.querySelector('.follow-us-title').textContent = translations[lang].followUs;
-            document.querySelector('.copyright-text p').textContent = translations[lang].copyright;
-            
-            // Update success modal
-            document.querySelector('.success-title').textContent = translations[lang].successTitle;
-            document.querySelector('.success-message').textContent = translations[lang].successMessage;
-            document.querySelector('.close-btn').textContent = translations[lang].closeBtn;
-            
-            // Update FAB labels
-            document.querySelector('.fab-main-label').textContent = translations[lang].fabMainLabel;
-            document.querySelector('.fab-whatsapp-label').textContent = translations[lang].fabWhatsappLabel;
-            document.querySelector('.fab-quick-label').textContent = translations[lang].fabQuickLabel;
-            document.querySelector('.fab-top-label').textContent = translations[lang].fabTopLabel;
-            
-            // Update current language display
-            document.getElementById('current-language').textContent = lang.toUpperCase();
-            
-            // Update active language option
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.classList.remove('active');
-                if (option.getAttribute('data-lang') === lang) {
-                    option.classList.add('active');
-                }
-            });
-            
-            // Update WhatsApp link with selected language
-            const whatsappLink = document.querySelector('.whatsapp-btn');
-            const whatsappText = encodeURIComponent(
-                lang === 'en' ? "Hello Hamid Watches, I'm interested in the Chronomaster Pro." :
-                lang === 'fr' ? "Bonjour Hamid Watches, je suis intéressé par le Chronomaster Pro." :
-                "مرحباً ساعات حميد، أنا مهتم ب ساعة الكرونوماستر برو."
-            );
-            whatsappLink.href = `https://wa.me/213000000000?text=${whatsappText}`;
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
             // --- Elements ---
             const mainImage = document.getElementById('main-product-image');
@@ -886,17 +531,18 @@
             const successModal = document.getElementById('success-modal');
             const closeModalBtn = document.getElementById('close-modal');
 
-            // Language selector elements
-            const languageButton = document.getElementById('language-button');
-            const languageDropdown = document.getElementById('language-dropdown');
-            const languageOptions = document.querySelectorAll('.language-option');
-
             // FAB Elements
             const fabMain = document.getElementById('fab-main');
             const fabOptions = document.getElementById('fab-options');
             const fabWhatsapp = document.getElementById('fab-whatsapp');
             const fabQuickOrder = document.getElementById('fab-quick-order');
             const fabScrollTop = document.getElementById('fab-scroll-top');
+            
+            // Quick Order Modal Elements
+            const quickOrderModal = document.getElementById('quick-order-modal');
+            const closeQuickOrder = document.getElementById('close-quick-order');
+            const quickOrderForm = document.getElementById('quick-order-form');
+            const quickOrderColor = document.getElementById('quick-order-color');
 
             // --- State ---
             let selectedColor = 'black';
@@ -921,19 +567,25 @@
                     thumbnails.forEach(t => t.classList.remove('active-thumbnail'));
                     firstVisibleThumbnail.classList.add('active-thumbnail');
                 }
+                
+                // Update quick order modal color display
+                const colorNames = {
+                    'black': 'Onyx Black',
+                    'blue': 'Midnight Blue',
+                    'green': 'Forest Green'
+                };
+                quickOrderColor.textContent = `Color: ${colorNames[color]}`;
             }
             
             function toggleFab() {
                 fabExpanded = !fabExpanded;
                 if (fabExpanded) {
                     fabOptions.classList.add('active');
-                    fabMain.innerHTML = '<i class="fas fa-times"></i><span class="fab-label fab-main-label">Close Menu</span>';
+                    fabMain.innerHTML = '<i class="fas fa-times"></i><span class="fab-label">Close Menu</span>';
                 } else {
                     fabOptions.classList.remove('active');
-                    fabMain.innerHTML = '<i class="fas fa-shopping-cart"></i><span class="fab-label fab-main-label">Quick Actions</span>';
+                    fabMain.innerHTML = '<i class="fas fa-shopping-cart"></i><span class="fab-label">Quick Actions</span>';
                 }
-                // Update FAB labels after toggling
-                changeLanguage(currentLang);
             }
             
             function scrollToTop() {
@@ -943,29 +595,18 @@
                 });
                 toggleFab(); // Close the FAB menu after clicking
             }
+            
+            function openQuickOrder() {
+                quickOrderModal.classList.add('active');
+                toggleFab(); // Close the FAB menu
+            }
+            
+            function closeQuickOrderModal() {
+                quickOrderModal.classList.remove('active');
+            }
 
             // --- Event Listeners ---
             
-            // Language selector
-            languageButton.addEventListener('click', function() {
-                languageDropdown.classList.toggle('active');
-            });
-            
-            languageOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    changeLanguage(lang);
-                    languageDropdown.classList.remove('active');
-                });
-            });
-            
-            // Close language dropdown when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!languageButton.contains(event.target) && !languageDropdown.contains(event.target)) {
-                    languageDropdown.classList.remove('active');
-                }
-            });
-
             // Thumbnail Clicks
             thumbnailContainer.addEventListener('click', function(e) {
                 if (e.target.classList.contains('thumbnail-img')) {
@@ -1033,22 +674,56 @@
             fabMain.addEventListener('click', toggleFab);
             
             fabWhatsapp.addEventListener('click', function() {
-                const whatsappText = encodeURIComponent(
-                    currentLang === 'en' ? "Hello Hamid Watches, I'm interested in the Chronomaster Pro." :
-                    currentLang === 'fr' ? "Bonjour Hamid Watches, je suis intéressé par le Chronomaster Pro." :
-                    "مرحباً ساعات حميد، أنا مهتم ب ساعة الكرونوماستر برو."
-                );
+                const colorNames = {
+                    'black': 'Onyx Black',
+                    'blue': 'Midnight Blue',
+                    'green': 'Forest Green'
+                };
+                const whatsappText = `Hello%20Hamid%20Watches,%20I'm%20interested%20in%20the%20Chronomaster%20Pro%20in%20${colorNames[selectedColor].replace(' ', '%20')}.`;
                 window.open(`https://wa.me/213000000000?text=${whatsappText}`, '_blank');
                 toggleFab(); // Close the FAB menu
             });
             
+            fabQuickOrder.addEventListener('click', openQuickOrder);
+            
             fabScrollTop.addEventListener('click', scrollToTop);
+            
+            // Quick Order Modal Events
+            closeQuickOrder.addEventListener('click', closeQuickOrderModal);
+            
+            quickOrderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                const orderData = {
+                    name: formData.get('name'),
+                    phone: formData.get('phone'),
+                    product: 'The Chronomaster Pro',
+                    color: selectedColor,
+                    price: '28,500 DZD',
+                    type: 'quick-order'
+                };
+                console.log('Quick Order:', orderData);
+                
+                // Show success modal
+                successModal.classList.remove('hidden');
+                setTimeout(() => {
+                    successModal.querySelector('div > div').classList.remove('scale-95', 'opacity-0');
+                    successModal.querySelector('div > div').classList.add('scale-100', 'opacity-100');
+                }, 10);
+                
+                quickOrderForm.reset();
+                closeQuickOrderModal();
+            });
+            
+            // Close modal when clicking outside
+            quickOrderModal.addEventListener('click', function(e) {
+                if (e.target === quickOrderModal) {
+                    closeQuickOrderModal();
+                }
+            });
 
             // --- Initial Setup ---
             updateThumbnails(selectedColor);
-            
-            // Initialize with English language
-            changeLanguage('en');
         });
     </script>
 </body>
