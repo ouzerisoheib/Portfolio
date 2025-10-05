@@ -1,730 +1,684 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hamid Watches Collection - The Chronomaster Pro</title>
-    
-    <!-- Tailwind CSS -->
+    <meta name="description" content="Ouzeri Soheib - Experienced Mobile Developer specializing in Kotlin Multiplatform, Android, and cross-platform solutions">
+    <meta name="keywords" content="Mobile Developer, Kotlin, Android, iOS, Kotlin Multiplatform, Jetpack Compose, Firebase">
+    <title>Ouzeri Soheib - Mobile Developer | Kotlin Multiplatform Expert</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"></noscript>
+
+    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons for modern icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Typed.js for dynamic typing effect -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
     <style>
-        /* Custom styles for a polished look */
+        /* Custom styles to match the design */
         body {
+            background-color: #0d001f;
             font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            color: #e0e0e0;
+            scroll-behavior: smooth;
         }
 
-        .active-thumbnail {
-            border-color: #ca8a04; /* gold-600 */
-            box-shadow: 0 0 0 2px #ca8a04;
-        }
-        
-        .color-swatch {
-            transition: all 0.2s ease-in-out;
-        }
-
-        .active-color-swatch {
-            transform: scale(1.2);
-            box-shadow: 0 0 0 3px white, 0 0 0 5px #ca8a04;
-        }
-        
-        /* Custom scrollbar for a better aesthetic */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        /* Custom gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #c874ff, #9b51e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
         }
 
-        /* Simple fade-in animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        
-        /* Floating Action Button Styles */
-        .fab-container {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        
-        .fab-main {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ca8a04, #a16207);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 20px rgba(202, 138, 4, 0.4);
-            cursor: pointer;
+        /* Glassmorphism effect for cards */
+        .glass-card {
+            background: rgba(25, 9, 51, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(155, 81, 224, 0.2);
             transition: all 0.3s ease;
+            border-radius: 1rem;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(155, 81, 224, 0.3);
+            border-color: rgba(155, 81, 224, 0.4);
+        }
+
+        /* Main logo and orbit animation */
+        .orbit-container {
             position: relative;
-            z-index: 10;
-        }
-        
-        .fab-main:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(202, 138, 4, 0.6);
-        }
-        
-        .fab-label {
-            position: absolute;
-            right: 70px;
-            background: #1f2937;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 14px;
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateX(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .fab-main:hover .fab-label {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .fab-options {
+            width: 300px;
+            height: 300px;
             display: flex;
-            flex-direction: column;
-            margin-bottom: 10px;
-            opacity: 0;
-            transform: scale(0.8) translateY(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .fab-options.active {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            pointer-events: all;
-        }
-        
-        .fab-option {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: white;
-            color: #4b5563;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 20px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
+            align-items: center;
+            margin-top: 2rem;
         }
-        
-        .fab-option:hover {
-            transform: scale(1.1);
-            background: #f3f4f6;
-        }
-        
-        .fab-option-label {
+
+        .orbit {
             position: absolute;
-            right: 55px;
-            background: #1f2937;
-            color: white;
-            padding: 6px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            white-space: nowrap;
+            border-style: solid;
+            border-color: rgba(155, 81, 224, 0.3);
+            border-radius: 50%;
+            animation: rotate 15s linear infinite;
+        }
+
+        .orbit:nth-child(1) { width: 150px; height: 150px; border-width: 1px; animation-duration: 12s; }
+        .orbit:nth-child(2) { width: 220px; height: 220px; border-width: 1px; animation-duration: 18s; animation-direction: reverse; }
+        .orbit:nth-child(3) { width: 300px; height: 300px; border-width: 2px; animation-duration: 25s; }
+
+        .central-logo {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #c874ff;
+            text-shadow: 0 0 15px #c874ff, 0 0 30px #c874ff;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+
+        /* Scroll-triggered fade-in animation */
+        .fade-in-section {
             opacity: 0;
-            transform: translateX(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        
-        .fab-option:hover .fab-option-label {
+        .fade-in-section.is-visible {
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
         }
-        
-        /* Quick Order Modal */
-        .quick-order-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+
+        /* Project gallery styles */
+        .project-gallery {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+        }
+        .project-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+        }
+        .project-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
         }
-        
-        .quick-order-modal.active {
-            opacity: 1;
-            pointer-events: all;
+        .project-screenshot {
+            max-width: 100%;
+            max-height: 450px;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: auto;
+            display: block;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            object-fit: contain;
         }
-        
-        .quick-order-content {
-            background: white;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .quick-order-modal.active .quick-order-content {
-            transform: scale(1);
-        }
-        
-        .quick-order-header {
-            padding: 20px;
-            border-bottom: 1px solid #e5e7eb;
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            padding: 0 0.5rem;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
         }
-        
-        .quick-order-body {
-            padding: 20px;
+        .project-gallery:hover .gallery-nav {
+            opacity: 1;
         }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #6b7280;
+        .gallery-button {
+            background-color: rgba(13, 0, 31, 0.7);
+            color: white;
+            border: 1px solid rgba(155, 81, 224, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
-            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
         }
-        
-        .close-modal:hover {
-            color: #374151;
+        .gallery-button:hover {
+            background-color: rgba(155, 81, 224, 0.7);
         }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .fab-container {
-                bottom: 20px;
-                right: 20px;
-            }
-            
-            .fab-main {
-                width: 56px;
-                height: 56px;
-                font-size: 22px;
-            }
-            
-            .fab-option {
-                width: 46px;
-                height: 46px;
-                font-size: 18px;
-            }
+        .gallery-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
         }
-        
-        @media (max-width: 480px) {
-            .fab-container {
-                bottom: 15px;
-                right: 15px;
-            }
-            
-            .fab-main {
-                width: 52px;
-                height: 52px;
-                font-size: 20px;
-            }
-            
-            .fab-option {
-                width: 44px;
-                height: 44px;
-                font-size: 17px;
-            }
-            
-            .fab-label, .fab-option-label {
-                display: none; /* Hide labels on very small screens */
-            }
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .indicator.bg-purple-500 {
+            transform: scale(1.2);
+            background-color: rgba(200, 116, 255, 1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(25, 9, 51, 0.3);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(155, 81, 224, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(155, 81, 224, 0.7);
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            background-color: rgba(13, 0, 31, 0.98);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Experience timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #9b51e0, #c874ff);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #9b51e0;
+            box-shadow: 0 0 0 4px rgba(155, 81, 224, 0.2);
+        }
+
+        /* Skill meter animation */
+        .skill-meter {
+            height: 4px;
+            background: rgba(155, 81, 224, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #c874ff, #9b51e0);
+            border-radius: 2px;
+            transition: width 1.5s ease-out;
+        }
+
+        /* Contact form styles */
+        .form-input {
+            background: rgba(25, 9, 51, 0.4);
+            border: 1px solid rgba(155, 81, 224, 0.2);
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(155, 81, 224, 0.5);
+            box-shadow: 0 0 0 3px rgba(155, 81, 224, 0.1);
+        }
+
+        /* Loading animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin 3s linear infinite;
+        }
+
+        /* Language switcher */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(25, 9, 51, 0.9);
+            border: 1px solid rgba(155, 81, 224, 0.3);
+            border-radius: 0.5rem;
+            min-width: 120px;
+            z-index: 100;
+        }
+        .language-switcher:hover .language-dropdown {
+            display: block;
+        }
+        .language-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .language-option:hover {
+            background: rgba(155, 81, 224, 0.3);
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="overflow-x-hidden">
 
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-900 tracking-wider">
-                <i class="fas fa-clock text-yellow-600"></i>
-                Hamid<span class="font-light">Watches</span>
-            </a>
-            <div class="hidden md:flex space-x-6 items-center">
-                <a href="#" class="text-gray-600 hover:text-yellow-600 transition duration-300">Men</a>
-                <a href="#" class="text-gray-600 hover:text-yellow-600 transition duration-300">Women</a>
-                <a href="#" class="text-gray-600 hover:text-yellow-600 transition duration-300">New Arrivals</a>
-                <a href="#" class="text-gray-600 hover:text-yellow-600 transition duration-300">Contact</a>
+<!-- Header & Navigation -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-opacity-30 backdrop-filter backdrop-blur-lg border-b border-purple-900/20">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold gradient-text hover:opacity-80 transition-opacity">OS</a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-8">
+            <a href="#home" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.home">Home</a>
+            <a href="#skills" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.skills">Skills</a>
+            <a href="#projects" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.projects">Projects</a>
+            <a href="#journey" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.journey">My Journey</a>
+            <a href="#resume" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.resume">Resume</a>
+            <a href="#contact" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.contact">Contact</a>
+
+            <!-- Language Switcher -->
+            <div class="language-switcher ml-4">
+                <button class="flex items-center text-gray-300 hover:text-white">
+                    <i data-lucide="languages" class="w-5 h-5 mr-1"></i>
+                    <span id="current-language">EN</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 ml-1"></i>
+                </button>
+                <div class="language-dropdown mt-2 py-2">
+                    <div class="language-option" data-lang="en">English</div>
+                    <div class="language-option" data-lang="fr">Français</div>
+                    <div class="language-option" data-lang="ar">العربية</div>
+                </div>
             </div>
-            <button class="md:hidden">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
         </nav>
-    </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 sm:px-6 py-8 md:py-12">
-        <div class="bg-white rounded-lg shadow-xl overflow-hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                
-                <!-- Product Image Gallery -->
-                <div class="p-4 sm:p-6 lg:p-8">
-                    <div class="aspect-w-1 aspect-h-1">
-                        <img id="main-product-image" 
-                             src="https://placehold.co/600x600/1a1a1a/ffffff?text=Chronomaster\nPro" 
-                             alt="Main view of the Chronomaster Pro watch in black." 
-                             class="w-full h-full object-cover rounded-lg shadow-lg transition-opacity duration-300">
-                    </div>
-                    <div class="grid grid-cols-4 gap-2 sm:gap-4 mt-4" id="thumbnail-container">
-                        <img src="https://placehold.co/150x150/1a1a1a/ffffff?text=Front" alt="Thumbnail 1" class="thumbnail-img cursor-pointer w-full object-cover rounded-md border-2 border-transparent hover:border-yellow-500 transition active-thumbnail" data-src="https://placehold.co/600x600/1a1a1a/ffffff?text=Chronomaster\nPro" data-color="black">
-                        <img src="https://placehold.co/150x150/3d3d3d/ffffff?text=Angle" alt="Thumbnail 2" class="thumbnail-img cursor-pointer w-full object-cover rounded-md border-2 border-transparent hover:border-yellow-500 transition" data-src="https://placehold.co/600x600/3d3d3d/ffffff?text=Side+View" data-color="black">
-                        <img src="https://placehold.co/150x150/000080/ffffff?text=Front" alt="Thumbnail 3" class="thumbnail-img cursor-pointer w-full object-cover rounded-md border-2 border-transparent hover:border-yellow-500 transition hidden" data-src="https://placehold.co/600x600/000080/ffffff?text=Midnight\nBlue" data-color="blue">
-                        <img src="https://placehold.co/150x150/202c34/ffffff?text=Angle" alt="Thumbnail 4" class="thumbnail-img cursor-pointer w-full object-cover rounded-md border-2 border-transparent hover:border-yellow-500 transition hidden" data-src="https://placehold.co/600x600/202c34/ffffff?text=Side+View" data-color="blue">
-                         <img src="https://placehold.co/150x150/006400/ffffff?text=Front" alt="Thumbnail 5" class="thumbnail-img cursor-pointer w-full object-cover rounded-md border-2 border-transparent hover:border-yellow-500 transition hidden" data-src="https://placehold.co/600x600/006400/ffffff?text=Forest\nGreen" data-color="green">
-                        <img src="https://placehold.co/150x150/223323/ffffff?text=Angle" alt="Thumbnail 6" class="thumbnail-img cursor-pointer w-full object-cover rounded-md border-2 border-transparent hover:border-yellow-500 transition hidden" data-src="https://placehold.co/600x600/223323/ffffff?text=Side+View" data-color="green">
-                    </div>
-                </div>
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
 
-                <!-- Product Details & Order Form -->
-                <div class="p-6 lg:p-8 flex flex-col justify-between">
-                    <div>
-                        <span class="text-sm font-semibold text-yellow-600 uppercase tracking-widest">Men's Collection</span>
-                        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-2 mb-4">The Chronomaster Pro</h1>
-                        <p class="text-gray-600 text-lg mb-6">
-                            Experience precision and style. The Chronomaster Pro is crafted with a stainless steel case, sapphire crystal glass, and a self-winding automatic movement. Perfect for the modern gentleman.
-                        </p>
-                        <div class="text-4xl font-bold text-gray-900 mb-6">
-                            28,500 <span class="text-2xl font-medium text-gray-500">DZD</span>
-                        </div>
+        <a href="mailto:soheib04ouz@gmail.com" class="hidden md:block bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-semibold px-5 py-2 rounded-lg transition-all shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40" data-i18n="nav.hire">Hire Me</a>
+    </div>
 
-                        <!-- Color Options -->
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-3">Select Color:</h3>
-                            <div class="flex items-center space-x-4">
-                                <button class="color-swatch w-8 h-8 rounded-full bg-gray-800 ring-2 ring-offset-2 ring-gray-800 active-color-swatch" data-color="black" title="Onyx Black"></button>
-                                <button class="color-swatch w-8 h-8 rounded-full bg-blue-900" data-color="blue" title="Midnight Blue"></button>
-                                <button class="color-swatch w-8 h-8 rounded-full bg-green-900" data-color="green" title="Forest Green"></button>
-                            </div>
-                        </div>
-
-                        <!-- Features -->
-                        <div class="border-t border-b border-gray-200 py-4 mb-6">
-                            <ul class="space-y-2 text-gray-700">
-                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> 42mm Stainless Steel Case</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Automatic Chronograph Movement</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> Water Resistant up to 100m</li>
-                                <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-3"></i> 2-Year International Warranty</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Order Form -->
-                    <div id="order-form">
-                        <h2 class="text-2xl font-bold text-center mb-4 text-gray-800">Order Now</h2>
-                        <p class="text-center text-gray-500 mb-6">Fill in your details for delivery.</p>
-                        
-                        <form id="delivery-form" class="space-y-4">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                                <input type="text" id="name" name="name" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
-                            </div>
-                            <div>
-                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                                <input type="tel" id="phone" name="phone" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
-                            </div>
-                            <div>
-                                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                                <input type="text" id="city" name="city" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
-                            </div>
-                            <div>
-                                <label for="state" class="block text-sm font-medium text-gray-700">State (Wilaya)</label>
-                                <select id="state" name="state" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
-                                    <option value="">Select your Wilaya</option>
-                                    <option value="Adrar">Adrar</option>
-                                    <option value="Chlef">Chlef</option>
-                                    <option value="Laghouat">Laghouat</option>
-                                    <option value="Oum El Bouaghi">Oum El Bouaghi</option>
-                                    <option value="Batna">Batna</option>
-                                    <option value="Béjaïa">Béjaïa</option>
-                                    <option value="Biskra">Biskra</option>
-                                    <option value="Béchar">Béchar</option>
-                                    <option value="Blida">Blida</option>
-                                    <option value="Bouira">Bouira</option>
-                                    <option value="Tamanrasset">Tamanrasset</option>
-                                    <option value="Tébessa">Tébessa</option>
-                                    <option value="Tlemcen">Tlemcen</option>
-                                    <option value="Tiaret">Tiaret</option>
-                                    <option value="Tizi Ouzou">Tizi Ouzou</option>
-                                    <option value="Alger">Alger</option>
-                                    <option value="Djelfa">Djelfa</option>
-                                    <option value="Jijel">Jijel</option>
-                                    <option value="Sétif">Sétif</option>
-                                    <option value="Saïda">Saïda</option>
-                                    <!-- Add all 58 wilayas for a complete list -->
-                                </select>
-                            </div>
-                            <button type="submit" class="w-full bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all duration-300 transform hover:scale-105">
-                                <i class="fas fa-paper-plane mr-2"></i> Confirm Order
-                            </button>
-                        </form>
-                        
-                        <div class="text-center my-4 text-gray-500 font-semibold">OR</div>
-
-                        <a href="https://wa.me/213000000000?text=Hello%20Hamid%20Watches,%20I'm%20interested%20in%20the%20Chronomaster%20Pro." target="_blank" class="w-full flex items-center justify-center bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 transition-all duration-300 transform hover:scale-105">
-                            <i class="fab fa-whatsapp text-xl mr-3"></i> Order via WhatsApp
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white mt-12">
-        <div class="container mx-auto px-6 py-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Hamid Watches Collection</h3>
-                    <p class="text-gray-400">The finest timepieces for every occasion. Quality and elegance delivered to your doorstep.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Shipping Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Follow Us</h3>
-                    <div class="flex justify-center md:justify-start space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
-                <p>&copy; 2024 Hamid Watches Collection. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- Success Message Modal -->
-    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50 p-4">
-        <div class="bg-white rounded-lg shadow-2xl p-8 text-center max-w-sm mx-auto transform transition-all scale-95 opacity-0">
-            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-check text-green-500 text-4xl"></i>
-            </div>
-            <h2 class="text-2xl font-bold text-gray-800 mb-2">Order Placed!</h2>
-            <p class="text-gray-600 mb-6">Thank you! We have received your order and will contact you shortly for confirmation.</p>
-            <button id="close-modal" class="bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-yellow-700 transition">
-                Close
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 right-0 w-64 z-50 p-6 border-l border-purple-900/20">
+        <div class="flex justify-between items-center mb-8">
+            <a href="#" class="text-2xl font-bold gradient-text">OS</a>
+            <button id="mobile-menu-close" class="text-gray-300 hover:text-white focus:outline-none">
+                <i data-lucide="x" class="w-6 h-6"></i>
             </button>
         </div>
-    </div>
+        <nav class="flex flex-col space-y-6">
+            <a href="#home" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.home">Home</a>
+            <a href="#skills" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.skills">Skills</a>
+            <a href="#projects" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.projects">Projects</a>
+            <a href="#journey" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.journey">My Journey</a>
+            <a href="#resume" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.resume">Resume</a>
+            <a href="#contact" class="text-gray-300 hover:text-white transition hover:underline hover:underline-offset-8 hover:decoration-purple-500" data-i18n="nav.contact">Contact</a>
 
-    <!-- Floating Action Button -->
-    <div class="fab-container">
-        <div class="fab-options" id="fab-options">
-            <div class="fab-option" id="fab-whatsapp">
-                <i class="fab fa-whatsapp"></i>
-                <span class="fab-option-label">Order via WhatsApp</span>
+            <!-- Mobile Language Switcher -->
+            <div class="pt-4 border-t border-purple-900/20" >
+                <h4 class="text-sm text-gray-500 mb-2" data-i18n="nav.language">Language</h4>
+                <div class="flex space-x-3">
+                    <button class="language-btn px-3 py-1 rounded-md bg-purple-900/30 text-white" data-lang="en">EN</button>
+                    <button class="language-btn px-3 py-1 rounded-md bg-transparent text-gray-400 hover:text-white" data-lang="fr">FR</button>
+                    <button class="language-btn px-3 py-1 rounded-md bg-transparent text-gray-400 hover:text-white" data-lang="ar">AR</button>
+                </div>
             </div>
-            <div class="fab-option" id="fab-quick-order">
-                <i class="fas fa-bolt"></i>
-                <span class="fab-option-label">Quick Order</span>
-            </div>
-            <div class="fab-option" id="fab-scroll-top">
-                <i class="fas fa-arrow-up"></i>
-                <span class="fab-option-label">Back to Top</span>
+
+            <a href="mailto:soheib04ouz@gmail.com" class="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-semibold px-5 py-2 rounded-lg transition-all shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 text-center" data-i18n="nav.hire">Hire Me</a>
+        </nav>
+        <div class="absolute bottom-6 left-6 right-6">
+            <div class="flex justify-center space-x-6">
+                <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="https://www.linkedin.com/in/ouzeriSoheib" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="linkedin" class="w-6 h-6"></i></a>
+                <a href="mailto:soheib04ouz@gmail.com" class="text-gray-400 hover:text-purple-400 transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
             </div>
         </div>
-        <div class="fab-main" id="fab-main">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="fab-label">Quick Actions</span>
-        </div>
     </div>
+</header>
 
-    <!-- Quick Order Modal -->
-    <div class="quick-order-modal" id="quick-order-modal">
-        <div class="quick-order-content">
-            <div class="quick-order-header">
-                <h3 class="text-xl font-bold text-gray-800">Quick Order - Chronomaster Pro</h3>
-                <button class="close-modal" id="close-quick-order">&times;</button>
-            </div>
-            <div class="quick-order-body">
-                <div class="flex items-center mb-4">
-                    <img src="https://placehold.co/80x80/1a1a1a/ffffff?text=CP" alt="Chronomaster Pro" class="rounded-md mr-4">
-                    <div>
-                        <h4 class="font-bold text-gray-800">Chronomaster Pro</h4>
-                        <p class="text-yellow-600 font-bold">28,500 DZD</p>
-                        <p class="text-sm text-gray-600" id="quick-order-color">Color: Onyx Black</p>
+<main class="container mx-auto px-6 pt-24"> <!-- Added pt-24 to prevent header overlap -->
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center fade-in-section">
+        <div class="flex justify-center mb-6">
+            <img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/1753725021420.jpg?alt=media&token=b000e577-95ae-4e21-957f-1c0392ca999e"
+                 alt="Ouzeri Soheib"
+                 class="w-28 h-28 rounded-full border-2 border-purple-500 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 transition-all duration-300 hover:scale-105"
+                 onerror="this.onerror=null;this.src='https://placehold.co/112x112/0d001f/c874ff?text=OS';">
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold my-4 leading-tight">Ouzeri Soheib</h1>
+        <h2 class="text-2xl md:text-3xl font-semibold my-4 h-10"><span id="typed-title" class="gradient-text"></span></h2>
+        <p class="text-lg text-gray-400 max-w-3xl mx-auto" data-i18n="hero.description">
+            A passionate mobile developer with 3+ years of experience building modern, user-friendly applications. Specializing in Kotlin Multiplatform to create seamless, high-performance experiences for both Android and iOS platforms.
+        </p>
+        <div class="mt-8 flex space-x-4">
+            <a href="#projects" class="bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 text-white font-semibold px-6 py-3 rounded-lg transition-all shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 flex items-center">
+                <i data-lucide="eye" class="w-5 h-5 mr-2"></i> <span data-i18n="hero.view-work">View Work</span>
+            </a>
+            <a href="#contact" class="bg-transparent hover:bg-purple-900/30 text-white font-semibold px-6 py-3 rounded-lg transition-all border border-purple-800 hover:border-purple-600 flex items-center">
+                <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i> <span data-i18n="hero.contact">Contact Me</span>
+            </a>
+        </div>
+        <div class="mt-12 animate-float">
+            <a href="#skills" class="text-gray-400 hover:text-purple-400 transition flex flex-col items-center">
+                <span class="text-sm mb-2" data-i18n="hero.explore">Explore More</span>
+                <i data-lucide="chevron-down" class="w-6 h-6"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 flex flex-col items-center justify-center fade-in-section">
+        <h2 class="text-3xl font-bold text-center mb-4" data-i18n="skills.title">Core Technologies</h2>
+        <p class="text-gray-400 text-center mb-8 max-w-2xl" data-i18n="skills.description">
+            I leverage modern architecture patterns like MVVM and Clean Architecture, with a strong focus on dependency injection using Dagger-Hilt and Koin.
+        </p>
+
+        <div class="w-full max-w-4xl mx-auto mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass-card p-6 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <img src="https://cdn.worldvectorlogo.com/logos/kotlin-1.svg" alt="Kotlin" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="font-bold mb-2">Kotlin</h3>
+                    <div class="skill-meter w-full">
+                        <div class="skill-level" style="width: 95%"></div>
                     </div>
                 </div>
-                
-                <form id="quick-order-form" class="space-y-4">
-                    <div>
-                        <label for="quick-name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                        <input type="text" id="quick-name" name="name" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                <div class="glass-card p-6 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/compose-logo.svg?alt=media&token=bdc2d511-7dc4-4eb0-9393-3fdccb7c5b85" alt="Kotlin Multiplatform" class="w-full h-full object-contain">
                     </div>
-                    <div>
-                        <label for="quick-phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                        <input type="tel" id="quick-phone" name="phone" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 sm:text-sm">
+                    <h3 class="font-bold mb-2">KMP</h3>
+                    <div class="skill-meter w-full">
+                        <div class="skill-level" style="width: 85%"></div>
                     </div>
-                    <button type="submit" class="w-full bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-yellow-700 focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-all duration-300">
-                        <i class="fas fa-paper-plane mr-2"></i> Complete Quick Order
-                    </button>
-                </form>
-                <p class="text-xs text-gray-500 mt-4 text-center">We'll contact you within 24 hours to confirm your order and delivery details.</p>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <img src="https://cdn.worldvectorlogo.com/logos/android-4.svg" alt="Android" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="font-bold mb-2">Android</h3>
+                    <div class="skill-meter w-full">
+                        <div class="skill-level" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="glass-card p-6 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4 flex items-center justify-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/jetpackcomposeicon.png?alt=media&token=d691eb7c-d921-425f-9802-61095505beac" alt="Jetpack Compose" class="w-full h-full object-contain">
+                    </div>
+                    <h3 class="font-bold mb-2">Compose</h3>
+                    <div class="skill-meter w-full">
+                        <div class="skill-level" style="width: 88%"></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Elements ---
-            const mainImage = document.getElementById('main-product-image');
-            const thumbnails = document.querySelectorAll('.thumbnail-img');
-            const colorSwatches = document.querySelectorAll('.color-swatch');
-            const thumbnailContainer = document.getElementById('thumbnail-container');
-            const deliveryForm = document.getElementById('delivery-form');
-            const successModal = document.getElementById('success-modal');
-            const closeModalBtn = document.getElementById('close-modal');
+        <div class="flex flex-wrap justify-center gap-4 md:gap-6 max-w-4xl mx-auto mb-16">
+            <img src="https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Kotlin%20Multiplatform-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin Multiplatform" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white" alt="Jetpack Compose" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Ktor-0095D5?style=for-the-badge&logo=ktor&logoColor=white" alt="Ktor" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Dagger-Hilt-ef6c00?style=for-the-badge&logo=dagger&logoColor=white" alt="Dagger-Hilt" class="h-10" loading="lazy">
+            <img src="https://img.shields.io/badge/Room-D45A16?style=for-the-badge&logo=sqlite&logoColor=white" alt="Room DB" class="h-10" loading="lazy">
+        </div>
 
-            // FAB Elements
-            const fabMain = document.getElementById('fab-main');
-            const fabOptions = document.getElementById('fab-options');
-            const fabWhatsapp = document.getElementById('fab-whatsapp');
-            const fabQuickOrder = document.getElementById('fab-quick-order');
-            const fabScrollTop = document.getElementById('fab-scroll-top');
-            
-            // Quick Order Modal Elements
-            const quickOrderModal = document.getElementById('quick-order-modal');
-            const closeQuickOrder = document.getElementById('close-quick-order');
-            const quickOrderForm = document.getElementById('quick-order-form');
-            const quickOrderColor = document.getElementById('quick-order-color');
+        <div class="orbit-container">
+            <div class="orbit"></div>
+            <div class="orbit"></div>
+            <div class="orbit"></div>
+            <div class="central-logo">OS</div>
+        </div>
+    </section>
 
-            // --- State ---
-            let selectedColor = 'black';
-            let fabExpanded = false;
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 fade-in-section">
+        <h2 class="text-3xl font-bold text-center mb-16" data-i18n="projects.title">Featured Projects</h2>
 
-            // --- Functions ---
-            function updateThumbnails(color) {
-                thumbnails.forEach(thumb => {
-                    if (thumb.dataset.color === color) {
-                        thumb.classList.remove('hidden');
-                    } else {
-                        thumb.classList.add('hidden');
-                    }
-                });
-                // Activate the first visible thumbnail for the selected color
-                const firstVisibleThumbnail = document.querySelector(`.thumbnail-img[data-color="${color}"]:not(.hidden)`);
-                if (firstVisibleThumbnail) {
-                    mainImage.src = firstVisibleThumbnail.dataset.src;
-                    mainImage.classList.add('fade-in');
-                    setTimeout(() => mainImage.classList.remove('fade-in'), 500);
+        <!-- Project 1: AutoSmart -->
+        <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+            <div class="md:pr-8">
+                <h3 class="text-2xl font-bold mb-4">AutoSmart</h3>
+                <p class="text-gray-400 mb-6" data-i18n="projects.autosmart.description">
+                    A comprehensive mobile marketplace for cars. Features include advanced filtering, map-based search via MapBox, real-time chat, and listing management. A key feature is an ML model for predicting car prices.
+                </p>
+                <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400" data-i18n="projects.tech-stack">Tech Stack:</strong> Jetpack Compose, Firebase, MapBox, Ktor, Dagger-Hilt, MVVM, Clean Architecture.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="flex items-center text-purple-400 hover:text-purple-300 transition bg-purple-900/30 hover:bg-purple-900/50 px-4 py-2 rounded-lg">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.view-code">View Code</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-400 bg-gray-800/30 px-4 py-2 rounded-lg cursor-not-allowed" aria-disabled="true">
+                        <i data-lucide="smartphone" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.app-unavailable">App Unavailable</span>
+                    </a>
+                </div>
+            </div>
+            <div class="glass-card rounded-2xl p-2 md:p-4 hover:shadow-lg hover:shadow-purple-500/20">
+                <div class="project-gallery" data-gallery-id="autosmart">
+                    <div class="project-slides">
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_161316_AutoSmart.png?alt=media&token=6c731535-fe5f-4eef-8ab7-32e6ffb93221" alt="AutoSmart Home" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_164926_AutoSmart.png?alt=media&token=2752a326-54ff-4f85-b2e4-772e6ddfff85" alt="AutoSmart Details" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_161650_AutoSmart.png?alt=media&token=b20946ce-c0f8-4b51-8254-ae7a99919fa4" alt="AutoSmart Prediction" class="project-screenshot" loading="lazy"></div>
+                    </div>
+                    <div class="gallery-nav">
+                        <button class="gallery-button prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                        <button class="gallery-button next" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    thumbnails.forEach(t => t.classList.remove('active-thumbnail'));
-                    firstVisibleThumbnail.classList.add('active-thumbnail');
-                }
-                
-                // Update quick order modal color display
-                const colorNames = {
-                    'black': 'Onyx Black',
-                    'blue': 'Midnight Blue',
-                    'green': 'Forest Green'
-                };
-                quickOrderColor.textContent = `Color: ${colorNames[color]}`;
-            }
-            
-            function toggleFab() {
-                fabExpanded = !fabExpanded;
-                if (fabExpanded) {
-                    fabOptions.classList.add('active');
-                    fabMain.innerHTML = '<i class="fas fa-times"></i><span class="fab-label">Close Menu</span>';
-                } else {
-                    fabOptions.classList.remove('active');
-                    fabMain.innerHTML = '<i class="fas fa-shopping-cart"></i><span class="fab-label">Quick Actions</span>';
-                }
-            }
-            
-            function scrollToTop() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                toggleFab(); // Close the FAB menu after clicking
-            }
-            
-            function openQuickOrder() {
-                quickOrderModal.classList.add('active');
-                toggleFab(); // Close the FAB menu
-            }
-            
-            function closeQuickOrderModal() {
-                quickOrderModal.classList.remove('active');
-            }
+        <!-- Project 2: 7irafi -->
+        <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+            <div class="glass-card rounded-2xl p-2 md:p-4 md:order-last hover:shadow-lg hover:shadow-purple-500/20">
+                <div class="project-gallery" data-gallery-id="hirafi">
+                    <div class="project-slides">
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162844_Hirafi.png?alt=media&token=3530aa9b-033b-4e4a-a73e-bfeb0e4fa343" alt="7irafi Home" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162857_Hirafi.png?alt=media&token=0a7ddcab-913c-4743-9ae6-3abb0482861a" alt="7irafi Profile" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162919_Hirafi.png?alt=media&token=f9845c6c-2671-4dea-b0e9-a878e6d448ed" alt="7irafi Search" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_162830_Hirafi.png?alt=media&token=601bf1c4-59d9-4ac5-bb73-10284dd541e2" alt="7irafi Login" class="project-screenshot" loading="lazy"></div>
+                    </div>
+                    <div class="gallery-nav">
+                        <button class="gallery-button prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                        <button class="gallery-button next" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="md:pl-8">
+                <h3 class="text-2xl font-bold mb-4">7irafi</h3>
+                <p class="text-gray-400 mb-6" data-i18n="projects.hirafi.description">
+                    A handyman marketplace platform connecting users with skilled professionals. Users can search for services, view handyman profiles, and initiate contact seamlessly.
+                </p>
+                <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400" data-i18n="projects.tech-stack">Tech Stack:</strong> Jetpack Compose, Firebase, MapBox, Ktor, FCM, Dagger-Hilt, MVVM.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="flex items-center text-purple-400 hover:text-purple-300 transition bg-purple-900/30 hover:bg-purple-900/50 px-4 py-2 rounded-lg">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.view-code">View Code</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-400 bg-gray-800/30 px-4 py-2 rounded-lg cursor-not-allowed" aria-disabled="true">
+                        <i data-lucide="smartphone" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.app-unavailable">App Unavailable</span>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-            // --- Event Listeners ---
-            
-            // Thumbnail Clicks
-            thumbnailContainer.addEventListener('click', function(e) {
-                if (e.target.classList.contains('thumbnail-img')) {
-                    const newSrc = e.target.dataset.src;
-                    mainImage.style.opacity = '0'; // Start fade out
-                    setTimeout(() => {
-                        mainImage.src = newSrc;
-                        mainImage.style.opacity = '1'; // Fade in
-                    }, 200);
+        <!-- Project 3: Easy Money Follow Up -->
+        <div class="grid md:grid-cols-2 gap-10 items-center mb-24">
+            <div class="md:pr-8">
+                <h3 class="text-2xl font-bold mb-4">Easy Money Follow Up</h3>
+                <p class="text-gray-400 mb-6" data-i18n="projects.easymoney.description">
+                    A secure chat application for course subscribers to communicate with admins and in groups. Built with Kotlin Multiplatform for both Android & iOS, it features enhanced security to prevent screenshots and screen recording.
+                </p>
+                <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400" data-i18n="projects.tech-stack">Tech Stack:</strong> Kotlin Multiplatform, Supabase, Bunny.net, Ktor, Koin, Clean Architecture.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="flex items-center text-purple-400 hover:text-purple-300 transition bg-purple-900/30 hover:bg-purple-900/50 px-4 py-2 rounded-lg">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.view-code">View Code</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-400 bg-gray-800/30 px-4 py-2 rounded-lg cursor-not-allowed" aria-disabled="true">
+                        <i data-lucide="smartphone" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.app-unavailable">App Unavailable</span>
+                    </a>
+                </div>
+            </div>
+            <div class="glass-card rounded-2xl p-2 md:p-4 hover:shadow-lg hover:shadow-purple-500/20">
+                <div class="project-gallery" data-gallery-id="easymoney">
+                    <div class="project-slides">
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_163530_Easy%20Money%20Follow%20Up.png?alt=media&token=99ad3705-f7f5-41ba-84cf-d3e380cea4ad" alt="Easy Money Chat" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_165622_Easy%20Money%20Follow%20Up.png?alt=media&token=074b2aad-3a5d-41f8-8ed2-5167155546a9" alt="Easy Money Admin Chat" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot_20250723_163612_Easy%20Money%20Follow%20Up.png?alt=media&token=996cfda4-a16a-46e6-923b-47966ab9cd39" alt="Easy Money Login" class="project-screenshot" loading="lazy"></div>
+                    </div>
+                    <div class="gallery-nav">
+                        <button class="gallery-button prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                        <button class="gallery-button next" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                    thumbnails.forEach(thumb => thumb.classList.remove('active-thumbnail'));
-                    e.target.classList.add('active-thumbnail');
-                }
-            });
+        <!-- Project 4: Mark Computer POS -->
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+            <div class="glass-card rounded-2xl p-2 md:p-4 md:order-last hover:shadow-lg hover:shadow-purple-500/20">
+                <div class="project-gallery" data-gallery-id="markcomputer">
+                    <div class="project-slides">
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170342.png?alt=media&token=954dc9e9-8c3e-4511-8b96-3ca2f1a23bd4" alt="Mark Computer Sales" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170314.png?alt=media&token=14e2091c-6d7e-4af2-aaee-977c83aee919" alt="Mark Computer POS" class="project-screenshot" loading="lazy"></div>
+                        <div class="project-slide"><img src="https://firebasestorage.googleapis.com/v0/b/nafaa-app.appspot.com/o/Screenshot%202025-07-23%20170403.png?alt=media&token=962d4bf1-945b-414d-9ec0-855c3575ae4a" alt="Mark Computer Table" class="project-screenshot" loading="lazy"></div>
+                    </div>
+                    <div class="gallery-nav">
+                        <button class="gallery-button prev" aria-label="Previous image"><i data-lucide="chevron-left"></i></button>
+                        <button class="gallery-button next" aria-label="Next image"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="md:pl-8">
+                <h3 class="text-2xl font-bold mb-4">Mark Computer POS</h3>
+                <p class="text-gray-400 mb-6" data-i18n="projects.markcomputer.description">
+                    A desktop Point-of-Sale (POS) and inventory management system for a computer store. It provides full sales functionalities, benefit calculation, and analytics.
+                </p>
+                <p class="text-gray-300 mb-6"><strong class="font-semibold text-purple-400" data-i18n="projects.tech-stack">Tech Stack:</strong> Compose for Desktop, Room, MVVM.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="https://github.com/ouzerisoheib" target="_blank" rel="noopener noreferrer" class="flex items-center text-purple-400 hover:text-purple-300 transition bg-purple-900/30 hover:bg-purple-900/50 px-4 py-2 rounded-lg">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.view-code">View Code</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-400 bg-gray-800/30 px-4 py-2 rounded-lg cursor-not-allowed" aria-disabled="true">
+                        <i data-lucide="monitor" class="w-5 h-5 mr-2"></i> <span data-i18n="projects.app-unavailable">App Unavailable</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Color Swatch Clicks
-            colorSwatches.forEach(swatch => {
-                swatch.addEventListener('click', function() {
-                    selectedColor = this.dataset.color;
-                    
-                    // Update active swatch UI
-                    colorSwatches.forEach(s => s.classList.remove('active-color-swatch'));
-                    this.classList.add('active-color-swatch');
+    <!-- My Journey Section -->
+    <section id="journey" class="py-20 fade-in-section">
+        <h2 class="text-3xl font-bold text-center mb-4" data-i18n="journey.title">My Learning Journey</h2>
+        <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto" data-i18n="journey.description">
+            My path through education and self-learning in mobile development.
+        </p>
 
-                    // Update thumbnails to show only the selected color
-                    updateThumbnails(selectedColor);
-                });
-            });
+        <div class="max-w-3xl mx-auto">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2" data-i18n="journey.2021.title">Baccalaureate & Architecture</h3>
+                    <p class="text-purple-400 mb-2">2021</p>
+                    <p class="text-gray-400" data-i18n="journey.2021.description">
+                        Obtained my first baccalaureate and pursued architecture studies before deciding to change direction.
+                    </p>
+                </div>
+            </div>
 
-            // Form Submission
-            deliveryForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                // In a real application, you would send this data to a server.
-                const formData = new FormData(this);
-                const orderData = {
-                    name: formData.get('name'),
-                    phone: formData.get('phone'),
-                    city: formData.get('city'),
-                    state: formData.get('state'),
-                    product: 'The Chronomaster Pro',
-                    color: selectedColor,
-                    price: '28,500 DZD'
-                };
-                console.log('New Order:', orderData);
-                
-                // Show success modal
-                successModal.classList.remove('hidden');
-                setTimeout(() => {
-                    successModal.querySelector('div > div').classList.remove('scale-95', 'opacity-0');
-                    successModal.querySelector('div > div').classList.add('scale-100', 'opacity-100');
-                }, 10);
-                
-                deliveryForm.reset();
-            });
-            
-            // Close Modal
-            closeModalBtn.addEventListener('click', function() {
-                successModal.querySelector('div > div').classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    successModal.classList.add('hidden');
-                }, 200);
-            });
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2" data-i18n="journey.2022.title">Second Baccalaureate & Computer Science</h3>
+                    <p class="text-purple-400 mb-2">2022</p>
+                    <p class="text-gray-400" data-i18n="journey.2022.description">
+                        Retook the baccalaureate and successfully passed again, then enrolled in computer science (engineering systems) at university.
+                    </p>
+                </div>
+            </div>
 
-            // FAB Event Listeners
-            fabMain.addEventListener('click', toggleFab);
-            
-            fabWhatsapp.addEventListener('click', function() {
-                const colorNames = {
-                    'black': 'Onyx Black',
-                    'blue': 'Midnight Blue',
-                    'green': 'Forest Green'
-                };
-                const whatsappText = `Hello%20Hamid%20Watches,%20I'm%20interested%20in%20the%20Chronomaster%20Pro%20in%20${colorNames[selectedColor].replace(' ', '%20')}.`;
-                window.open(`https://wa.me/213000000000?text=${whatsappText}`, '_blank');
-                toggleFab(); // Close the FAB menu
-            });
-            
-            fabQuickOrder.addEventListener('click', openQuickOrder);
-            
-            fabScrollTop.addEventListener('click', scrollToTop);
-            
-            // Quick Order Modal Events
-            closeQuickOrder.addEventListener('click', closeQuickOrderModal);
-            
-            quickOrderForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
-                const orderData = {
-                    name: formData.get('name'),
-                    phone: formData.get('phone'),
-                    product: 'The Chronomaster Pro',
-                    color: selectedColor,
-                    price: '28,500 DZD',
-                    type: 'quick-order'
-                };
-                console.log('Quick Order:', orderData);
-                
-                // Show success modal
-                successModal.classList.remove('hidden');
-                setTimeout(() => {
-                    successModal.querySelector('div > div').classList.remove('scale-95', 'opacity-0');
-                    successModal.querySelector('div > div').classList.add('scale-100', 'opacity-100');
-                }, 10);
-                
-                quickOrderForm.reset();
-                closeQuickOrderModal();
-            });
-            
-            // Close modal when clicking outside
-            quickOrderModal.addEventListener('click', function(e) {
-                if (e.target === quickOrderModal) {
-                    closeQuickOrderModal();
-                }
-            });
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2" data-i18n="journey.self-learning.title">Self-Taught Development</h3>
+                    <p class="text-purple-400 mb-2">2022 - Present</p>
+                    <p class="text-gray-400" data-i18n="journey.self-learning.description">
+                        Began learning mobile development with Kotlin and XML, then transitioned to Jetpack Compose. Now focusing on Kotlin Multiplatform for cross-platform development.
+                    </p>
+                </div>
+            </div>
 
-            // --- Initial Setup ---
-            updateThumbnails(selectedColor);
-        });
-    </script>
-</body>
-</html>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="glass-card p-6">
+                    <h3 class="text-xl font-bold mb-2" data-i18n="journey.computer-security.title">Computer Security Specialization</h3>
+                    <p class="text-purple-400 mb-2">2024</p>
+                    <p class="text-gray-400" data-i18n="journey.computer-security.descr
